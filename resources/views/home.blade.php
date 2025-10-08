@@ -601,6 +601,57 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .btn-blue {
+            display: inline-block;
+            background-color: #007bff;
+            /* Azul */
+            color: #fff;
+            /* Texto branco */
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: background-color 0.25s ease;
+        }
+
+        .btn-blue:hover {
+            background-color: #0056b3;
+            /* Azul mais escuro ao passar o mouse */
+        }
+
+        .chat-float {
+            position: fixed;
+            right: 20px;
+            bottom: 40px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--ifpr-light-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, background-color 0.3s;
+            z-index: 999;
+        }
+
+        .chat-float:hover {
+            background-color: var(--ifpr-blue);
+            transform: translateY(-5px);
+        }
+
+        .chat-float i {
+            transition: transform 0.3s;
+        }
+
+        .chat-float:hover i {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 
@@ -659,26 +710,68 @@
                     <li><a href="#agendamento">Agendamento</a></li>
                     <li><a href="#contato">Contato</a></li>
 
-                    <!-- Login / Logout -->
-                    <li>
-                        @guest
-                            <!-- Link para abrir modal ou página de login -->
-                            <a href="{{ route('login') }}">Login</a>
-                        @endguest
+                    @guest
+                        <a href="{{ route('login') }}" class="btn-blue">Login</a>
+                    @endguest
 
-                        @auth
-                            <!-- Mostrar nome do usuário e botão de logout -->
-                            <div class="nav-logout">
-                                <span>{{ Auth::user()->name }}</span>
-                                <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                                    @csrf
-                                    <button type="submit"
-                                        style="background:none; border:none; color:#007bff; cursor:pointer; padding:0; font-size:14px;">
-                                        Log out
-                                    </button>
-                                </form>
-                            </div>
-                        @endauth
+                    @auth
+                        <div class="nav-logout">
+                            <span class="user-name">{{ Auth::user()->name }}</span>
+                            <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                                @csrf
+                                <button type="submit">Log out</button>
+                            </form>
+                        </div>
+
+                        <style>
+                            .nav-logout {
+                                display: flex;
+                                align-items: center;
+                                gap: 14px;
+                                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                font-size: 14px;
+                                color: #333;
+                                padding: 6px 10px;
+                                background: #f8f9fa;
+                                /* leve fundo para separar do menu */
+                                border-radius: 8px;
+                                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+                                transition: all 0.3s ease;
+                            }
+
+                            .nav-logout:hover {
+                                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                            }
+
+                            .user-name {
+                                font-weight: 600;
+                                color: #1a73e8;
+                                white-space: nowrap;
+                            }
+
+                            .logout-form button {
+                                background: #fff;
+                                border: 1px solid #1a73e8;
+                                color: #1a73e8;
+                                padding: 6px 14px;
+                                border-radius: 6px;
+                                cursor: pointer;
+                                font-size: 13px;
+                                font-weight: 500;
+                                transition: all 0.3s ease;
+                                min-width: 70px;
+                            }
+
+                            .logout-form button:hover {
+                                background: #1a73e8;
+                                color: #fff;
+                                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+                                transform: translateY(-1px);
+                            }
+                        </style>
+
+                    @endauth
+
                     </li>
                 </ul>
             </nav>
@@ -715,6 +808,9 @@
             <h2>IFLAB - Laboratório de Fabricação, Robótica e Prototipagem</h2>
             <p>Um espaço inovador para desenvolvimento de projetos, experimentação e aprendizado prático em tecnologias
                 de fabricação digital, robótica e eletrônica.</p>
+            <a href="{{ route('chat') }}" class="chat-float" title="Abrir Chat">
+                <i class="fas fa-comment-dots"></i>
+            </a>
             <a href="#agendamento" class="btn-primary">Agende seu uso</a>
         </div>
     </section>
@@ -902,7 +998,7 @@
             </div>
 
             <div class="events-cta">
-                <a href="eventos.html" class="btn-primary">Ver Todos os Eventos</a>
+                <a href="{{ route('eventos.index') }}" class="btn-primary">Ver Todos os Eventos</a>
             </div>
         </div>
     </section>

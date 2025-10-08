@@ -547,6 +547,22 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .Eventos-btn-componente {
+            background-color: #0056a3;
+            color: white;
+            padding: 15px;
+            width: 230px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 15px;
+        }
+
+        .Eventos-btn-componente:hover {
+            background-color: #47708f;
+            transition: 0.5s:
+        }
     </style>
 </head>
 
@@ -605,7 +621,6 @@
                     <li><a href="inflab.html#eventos">Eventos</a></li>
                     <li><a href="inflab.html#agendamento">Agendamento</a></li>
                     <li><a href="inflab.html#contato">Contato</a></li>
-                    <li><a href="{{ route('eventos.create') }}">Cadastrar Novo Evento</a></li>
                 </ul>
             </nav>
         </div>
@@ -635,8 +650,10 @@
                 <button class="filter-btn" data-filter="treinamento">Treinamentos</button>
                 <button class="filter-btn" data-filter="exposicao">Exposições</button>
                 @auth
-                    @if (Auth::user()->name === 'Carolini')
-                        <a href="{{ route('eventos.create') }}" class="filter-btn">Cadastrar Novo Evento</a>
+                    @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com')
+                        <a href="{{ route('eventos.create') }}" class="Eventos-btn-componente">
+                            Cadastrar Novo Evento
+                        </a>
                     @endif
                 @endauth
 

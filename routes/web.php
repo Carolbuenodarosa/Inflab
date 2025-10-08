@@ -38,3 +38,10 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+use App\Http\Controllers\ChatController;
+Route::get('/chat', [ChatController::class, 'index'])->name('chat');
