@@ -91,22 +91,40 @@
 
 <body>
     <h2>Cadastrar Evento</h2>
+    <div style="max-width: 500px; margin: 0 auto 20px; text-align: left;">
+        <a href="{{ route('home') }}">
+            <button type="button"
+                style="
+                background-color: #6c757d;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                font-size: 14px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            "
+                onmouseover="this.style.backgroundColor='#5a6268'" onmouseout="this.style.backgroundColor='#6c757d'">
+                ← Voltar para Home
+            </button>
+        </a>
+    </div>
 
     <!-- Exibir mensagens de erro -->
     @if ($errors->any())
-    <div class="alert alert-error">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+        <div class="alert alert-error">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
 
     @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
     @endif
 
     <form action="{{ route('eventos.store') }}" method="POST" enctype="multipart/form-data">
@@ -118,7 +136,7 @@
         <label for="categoria">Categoria:</label>
         <select name="categoria" id="categoria" required>
             <option value="">Selecione uma categoria</option>
-            <option value="visita">visita</option>
+            <option value="visita">visitas</option>
             <option value="workshops">workshops</option>
             <option value="Treinamentos">Treinamentos</option>
             <option value="Exposições">Exposições</option>

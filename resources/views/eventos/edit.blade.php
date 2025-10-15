@@ -98,6 +98,22 @@
 
 <body>
     <h2>Editar Evento</h2>
+     <div style="max-width: 500px; margin: 0 auto 20px; text-align: left;">
+        <a href="{{ route('home') }}">
+            <button type="button" style="
+                background-color: #6c757d;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                font-size: 14px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            " onmouseover="this.style.backgroundColor='#5a6268'" onmouseout="this.style.backgroundColor='#6c757d'">
+                ← Voltar para Home
+            </button>
+        </a>
+    </div>
 
     <!-- Exibir mensagens de erro -->
     @if ($errors->any())

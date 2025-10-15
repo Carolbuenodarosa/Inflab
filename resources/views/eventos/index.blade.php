@@ -1,3 +1,4 @@
+@include('layouts.cabecalho')
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -24,65 +25,12 @@
 
         body {
             color: var(--ifpr-text);
-            line-height: 1.6;
         }
 
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* Header */
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo svg {
-            height: 50px;
-            margin-right: 15px;
-        }
-
-        .logo h1 {
-            color: var(--ifpr-blue);
-            font-size: 1.5rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 25px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--ifpr-text);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--ifpr-light-blue);
         }
 
         /* Page Header */
@@ -567,64 +515,7 @@
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <svg id="marca-ifpr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 235 54" role="img"
-                    aria-label="Instituto Federal do Paraná">
-                    <title>Instituto Federal do Paraná</title>
-                    <desc>Marca do IFPR</desc>
-                    <path fill="#2f9e41"
-                        d="M37.4 36.4c0 0.6-0.5 1.1-1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V36.4z">
-                    </path>
-                    <path fill="#2f9e41"
-                        d="M24.4 10.3c0 0.6-0.5 1.1-1.1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1V1.6c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V10.3z">
-                    </path>
-                    <path fill="#2f9e41"
-                        d="M37.4 10.3c0 0.6-0.5 1.1-1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1V1.6c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V10.3z">
-                    </path>
-                    <path fill="#2f9e41"
-                        d="M11.4 23.3c0 0.6-0.5 1.1-1.1 1.1H1.6c-0.6 0-1-0.5-1-1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V23.3z">
-                    </path>
-                    <path fill="#2f9e41"
-                        d="M24.4 23.3c0 0.6-0.5 1.1-1.1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V23.3z">
-                    </path>
-                    <path fill="#2f9e41"
-                        d="M11.4 36.4c0 0.6-0.5 1.1-1.1 1.1H1.6c-0.6 0-1-0.5-1-1.1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V36.4z">
-                    </path>
-                    <path fill="#2f9e41"
-                        d="M24.4 36.4c0 0.6-0.5 1.1-1.1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V36.4z">
-                    </path>
-                    <path fill="#2f9e41"
-                        d="M11.4 49.4c0 0.6-0.5 1.1-1.1 1.1H1.6c-0.6 0-1-0.5-1-1.1v-8.7c0-0.6 0.5-1 1.1-1h8.7c0.6 0 1.1 0.5 1.1 1.1V49.4z">
-                    </path>
-                    <path fill="#2f9e41"
-                        d="M24.4 49.4c0 0.6-0.5 1.1-1.1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1v-8.7c0-0.6 0.5-1 1.1-1h8.7c0.6 0 1.1 0.5 1.1 1.1V49.4z">
-                    </path>
-                    <path fill="#ce181e" d="M11.9 6c0 3.3-2.7 6-6 6C2.7 11.9 0 9.3 0 6S2.7 0 6 0C9.3 0 11.9 2.7 11.9 6">
-                    </path>
-                    <text transform="matrix(1.0017 0 0 1 43.6553 24.1582)" fill="#black"
-                        font-family="Arial, sans-serif" font-size="14" font-weight="bold">INSTITUTO FEDERAL</text>
-                    <text transform="matrix(1.0017 0 0 1 43.9331 37.5249)" fill="#black"
-                        font-family="Arial, sans-serif" font-size="12" font-weight="bold">Paraná</text>
-                    <text transform="matrix(1.0017 0 0 1 43.9326 50.5059)" fill="#black"
-                        font-family="Arial, sans-serif" font-size="12">Campus Palmas</text>
-                </svg>
-                <h1>IFPR Campus Palmas</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="{{ route('home') }}">Início</a></li>
-                    <li><a href="inflab.html#sobre">Sobre</a></li>
-                    <li><a href="inflab.html#servicos">Serviços</a></li>
-                    <li><a href="inflab.html#eventos">Eventos</a></li>
-                    <li><a href="inflab.html#agendamento">Agendamento</a></li>
-                    <li><a href="inflab.html#contato">Contato</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+
 
     <!-- Page Header -->
     <div class="page-header">

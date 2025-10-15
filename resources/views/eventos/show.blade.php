@@ -1,3 +1,4 @@
+@include('layouts.cabecalho')
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -8,7 +9,6 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
-            padding: 30px;
         }
 
         .evento-container {
@@ -64,10 +64,11 @@
     <div class="evento-container">
         <h2>{{ $evento->titulo }}</h2>
 
-        @if($evento->imagem && Storage::disk('public')->exists($evento->imagem))
+        @if ($evento->imagem && Storage::disk('public')->exists($evento->imagem))
             <img src="{{ Storage::url($evento->imagem) }}" alt="Imagem do Evento" class="evento-imagem">
         @else
-            <div class="evento-imagem" style="background-color: #ddd; display:flex; align-items:center; justify-content:center;">
+            <div class="evento-imagem"
+                style="background-color: #ddd; display:flex; align-items:center; justify-content:center;">
                 Sem imagem
             </div>
         @endif
@@ -81,7 +82,7 @@
         </div>
 
         <a href="{{ route('eventos.index') }}" class="btn-voltar">Voltar para Lista</a>
-     <a href="{{ route('eventos.edit', $evento->id) }}" class="btn-voltar">Editar evento</a>
+        <a href="{{ route('eventos.edit', $evento->id) }}" class="btn-voltar">Editar evento</a>
     </div>
 </body>
 
