@@ -82,7 +82,11 @@
         </div>
 
         <a href="{{ route('eventos.index') }}" class="btn-voltar">Voltar para Lista</a>
-        <a href="{{ route('eventos.edit', $evento->id) }}" class="btn-voltar">Editar evento</a>
+        @auth
+            @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com')
+                <a href="{{ route('eventos.edit', $evento->id) }}" class="btn-voltar">Editar evento</a>
+            @endif
+        @endauth
     </div>
 </body>
 
