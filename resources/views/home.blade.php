@@ -876,7 +876,8 @@
             <div class="booking-form">
                 <h3 style="text-align: center; color: var(--ifpr-blue); margin-bottom: 30px;">Formulário de Agendamento
                 </h3>
-                <form id="bookingForm">
+                <form id="bookingForm" method="POST" action="{{ route('booking.store') }}">
+                    @csrf
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Nome Completo</label>
@@ -1128,4 +1129,3 @@
 </body>
 
 </html>
-

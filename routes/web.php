@@ -50,3 +50,7 @@ Route::get('/chat', [ChatController::class, 'index'])->name('chat');
 Route::get('/chat', function () {
     return view('chat'); // nome do seu Blade
 })->middleware('auth')->name('chat');
+
+use App\Http\Controllers\BookingController;
+
+Route::post('/agendamento', [BookingController::class, 'store'])->name('booking.store');
