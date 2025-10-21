@@ -12,7 +12,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        // Validação dos dados
+        // Validação dos dados recebidos
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
@@ -24,23 +24,26 @@ class BookingController extends Controller
             'project' => 'required|string|max:1000',
         ]);
 
-        // Verificar se o horário já está reservado
-        $existe = Booking::where('date', $validated['date'])
-                        ->where('time', $validated['time'])
-                        ->exists();
+        // Verifica se já existe agendamento para a data e horário informados
+        $exists = Booking::where('date', $validated['date'])
+                         ->where('time', $validated['time'])
+                         ->exists();
 
-        if ($existe) {
-            return back()->withErrors(['time' => 'Este horário já está reservado.'])->withInput();
+        if ($exists) {
+            return back()
+                ->withErrors(['time' => 'Este horário já está reservado.'])
+                ->withInput();
         }
 
-        // Criar o agendamento
+        // Cria o agendamento no banco de dados
         Booking::create($validated);
 
+        // Retorna para a página anterior com mensagem de sucesso
         return back()->with('success', 'Agendamento realizado com sucesso!');
     }
 
     /**
-     * Retorna todos os horários reservados como JSON para o calendário.
+     * Retorna os horários reservados para uso no calendário (formato JSON).
      */
     public function horariosReservados()
     {
@@ -51,7 +54,7 @@ class BookingController extends Controller
                 'title' => 'Reservado',
                 'start' => $booking->date . 'T' . $booking->time,
                 'color' => 'red',
-                'display' => 'background' // mostra como "indisponível" no calendário
+                'display' => 'background', // Indica no calendário como horário indisponível
             ];
         });
 

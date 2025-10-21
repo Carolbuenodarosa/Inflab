@@ -44,8 +44,6 @@ Route::get('/login', function () {
 })->name('login');
 
 use App\Http\Controllers\ChatController;
-Route::get('/chat', [ChatController::class, 'index'])->name('chat');
-
 // Apenas usuários autenticados podem acessar
 Route::get('/chat', function () {
     return view('chat'); // nome do seu Blade
