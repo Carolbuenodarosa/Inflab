@@ -112,7 +112,7 @@ class EventoController extends Controller
             'hora_evento' => 'nullable',
             'local' => 'nullable|string|max:255',
             'status' => 'required|string|in:ativo,cancelado,concluido',
-            'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic,webp|max:5120',
         ]);
 
         // 3️⃣ Atualizar os campos do evento
