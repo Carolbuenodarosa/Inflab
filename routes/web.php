@@ -45,9 +45,10 @@ Route::get('/login', function () {
 
 use App\Http\Controllers\ChatController;
 // Apenas usuários autenticados podem acessar
-Route::get('/chat', function () {
-    return view('chat'); // nome do seu Blade
-})->middleware('auth')->name('chat');
+
+Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');   // 🔹 Ler mensagens
+Route::post('/chat', [ChatController::class, 'store'])->name('chat.store'); // 🔹 Gravar nova mensagem
+
 
 use App\Http\Controllers\BookingController;
 

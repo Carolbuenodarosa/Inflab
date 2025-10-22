@@ -644,7 +644,7 @@
             <h2>IFLAB - Laboratório de Fabricação, Robótica e Prototipagem</h2>
             <p>Um espaço inovador para desenvolvimento de projetos, experimentação e aprendizado prático em tecnologias
                 de fabricação digital, robótica e eletrônica.</p>
-            <a href="{{ route('chat') }}" class="chat-float" title="Abrir Chat">
+                <a href="{{ route('chat.index') }}">🗨️ Abrir Chat</a>
                 <i class="fas fa-comment-dots"></i>
             </a>
             <a href="#agendamento" class="btn-primary">Agende seu uso</a>
