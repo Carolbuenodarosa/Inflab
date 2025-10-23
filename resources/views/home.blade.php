@@ -605,8 +605,11 @@
 
         .chat-float {
             position: fixed;
+            /* mantém fixo ao rolar a página */
             right: 20px;
+            /* distância da borda direita */
             bottom: 40px;
+            /* distância do rodapé */
             width: 60px;
             height: 60px;
             background-color: var(--ifpr-light-blue);
@@ -634,6 +637,26 @@
         .chat-float:hover i {
             transform: scale(1.2);
         }
+
+        .chat-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            /* azul */
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .chat-icon:hover {
+            background-color: #0056b3;
+            /* azul mais escuro ao passar o mouse */
+        }
     </style>
 </head>
 
@@ -644,9 +667,20 @@
             <h2>IFLAB - Laboratório de Fabricação, Robótica e Prototipagem</h2>
             <p>Um espaço inovador para desenvolvimento de projetos, experimentação e aprendizado prático em tecnologias
                 de fabricação digital, robótica e eletrônica.</p>
-                <a href="{{ route('chat.index') }}">🗨️ Abrir Chat</a>
-                <i class="fas fa-comment-dots"></i>
-            </a>
+
+            <!-- Ícone azul do chat -->
+            @auth
+                <!-- Usuário logado: vai para o chat -->
+                <a href="{{ route('chat.index') }}" class="chat-float" title="Abrir Chat">
+                    <i class="fas fa-comment-dots"></i>
+                </a>
+            @else
+                <!-- Usuário não logado: vai para login -->
+                <a href="{{ route('login') }}" class="chat-float" title="Faça login para acessar o chat">
+                    <i class="fas fa-comment-dots"></i>
+                </a>
+            @endauth
+
             <a href="#agendamento" class="btn-primary">Agende seu uso</a>
         </div>
     </section>
