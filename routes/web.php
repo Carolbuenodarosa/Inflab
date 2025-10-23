@@ -48,6 +48,7 @@ use App\Http\Controllers\ChatController;
 
 Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');   // 🔹 Ler mensagens
 Route::post('/chat', [ChatController::class, 'store'])->name('chat.store'); // 🔹 Gravar nova mensagem
+Route::get('/chat/messages', [ChatController::class, 'getMessages'])->name('chat.messages');
 
 
 use App\Http\Controllers\BookingController;

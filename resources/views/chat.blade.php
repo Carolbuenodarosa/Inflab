@@ -137,17 +137,13 @@
 
 
     <div class="chat-box" id="chat-box">
-        @forelse ($messages as $msg)
-            <div class="message {{ auth()->id() === $msg->user_id ? 'my-message' : 'other-message' }}">
-                <div class="message-header">
-                    <span class="user">{{ $msg->user->name ?? 'Usuário' }}</span>
-                    <span class="time">{{ $msg->created_at->format('d/m/Y H:i') }}</span>
-                </div>
-                <div class="message-text">{{ $msg->message }}</div>
+        @foreach ($messages as $msg)
+            <div class="message">
+                <strong>{{ $msg->user->name ?? 'Anonimo' }}:</strong>
+                {{ $msg->message }}
+                <span class="time">{{ $msg->created_at->format('H:i:s') }}</span>
             </div>
-        @empty
-            <p>Nenhuma mensagem ainda.</p>
-        @endforelse
+        @endforeach
     </div>
 
     <form action="{{ route('chat.store') }}" method="POST">
@@ -157,5 +153,25 @@
     </form>
 
 </body>
+<script>
+    function fetchMessages() {
+        fetch("{{ route('chat.messages') }}")
+            .then(response => response.json())
+            .then(data => {
+                const chatBox = document.getElementById('chat-box');
+                chatBox.innerHTML = '';
+                data.forEach(msg => {
+                    const div = document.createElement('div');
+                    div.classList.add('message');
+                    div.innerHTML =
+                        `<strong>${msg.user ? msg.user.name : 'Anonimo'}:</strong> ${msg.message} <span class="time">${new Date(msg.created_at).toLocaleTimeString()}</span>`;
+                    chatBox.appendChild(div);
+                });
+            });
+    }
+
+    // Atualiza a cada 2 segundos
+    setInterval(fetchMessages, 2000);
+</script>
 
 </html>

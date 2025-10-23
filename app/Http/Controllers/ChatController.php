@@ -72,4 +72,12 @@ class ChatController extends Controller
     {
         //
     }
+    public function getMessages()
+    {
+        $messages = Message::with('user')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json($messages);
+    }
 }
