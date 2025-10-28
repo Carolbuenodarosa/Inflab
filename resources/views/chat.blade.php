@@ -32,7 +32,8 @@
             z-index: 1200;
         }
 
-        .top-buttons button {
+        .top-buttons button,
+        .top-buttons a {
             background: #007bff;
             color: white;
             border: none;
@@ -43,9 +44,11 @@
             gap: 5px;
             padding: 6px 10px;
             font-size: 0.9em;
+            text-decoration: none;
         }
 
-        .top-buttons button:hover {
+        .top-buttons button:hover,
+        .top-buttons a:hover {
             background: #0056b3;
         }
 
@@ -61,7 +64,7 @@
             align-items: flex-start;
             gap: 20px;
             width: 98%;
-            margin: 50px auto 0 auto;
+            margin: 60px auto 0 auto;
             max-width: 1100px;
         }
 
@@ -75,11 +78,41 @@
             box-shadow: 0 0 25px rgba(0, 85, 170, 0.2);
             background-color: #ffffff;
             overflow: hidden;
+            position: relative;
         }
 
         body.dark-mode .chat-container {
             background-color: #1e1e1e;
             color: #e0e0e0;
+        }
+
+        /* BOTÃO HOME (desktop) */
+        .home-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            /* <-- MOVIDO PARA A DIREITA */
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 0.9em;
+            text-decoration: none;
+            display: none;
+        }
+
+        .home-btn:hover {
+            background: #0056b3;
+        }
+
+        @media(min-width:1025px) {
+            .home-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+            }
         }
 
         .chat-header {
@@ -144,11 +177,6 @@
 
         .chat-box::-webkit-scrollbar-track {
             background-color: rgba(0, 0, 0, 0.05);
-        }
-
-        .chat-box {
-            scrollbar-width: thin;
-            scrollbar-color: rgba(0, 123, 255, 0.7) rgba(0, 0, 0, 0.05);
         }
 
         body.dark-mode .chat-box {
@@ -264,16 +292,8 @@
             margin-bottom: 10px;
         }
 
-        .info-panel p,
-        .sidebar p {
-            font-size: 0.95em;
-            margin-bottom: 8px;
-        }
-
-        /* BOTÃO DARK NA ABA ESQUERDA (PC) */
         .darkmode-toggle-sidebar {
             margin-top: 10px;
-            /* puxado para cima */
             align-self: center;
             padding: 8px 12px;
             background: #007bff;
@@ -294,7 +314,6 @@
             }
         }
 
-        /* COMPUTADOR: ABAS FIXAS */
         @media(min-width:1025px) {
             .info-panel {
                 left: 0;
@@ -307,7 +326,6 @@
             }
         }
 
-        /* TABLET/CELULAR: ABAS DESLIZANTES */
         @media(max-width:1024px) {
             .info-panel {
                 left: 0;
@@ -333,6 +351,7 @@
 <body>
     <!-- BOTÕES FLUTUANTES (mobile/tablet) -->
     <div class="top-buttons">
+        <a href="/" title="Voltar à Home"><i class="fas fa-home"></i></a>
         <button onclick="toggleInfo()"><i class="fas fa-info-circle"></i></button>
         <button onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
         <button id="darkmode-top" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
@@ -362,6 +381,7 @@
     <!-- CHAT -->
     <div class="main-wrapper">
         <div class="chat-container">
+            <a href="/" class="home-btn"><i class="fas fa-home"></i> Home</a>
             <div class="chat-header">
                 <img src="https://tse4.mm.bing.net/th/id/OIP.r-_T9dzFN6S42XXPpoK55AHaHa?pid=Api&P=0&h=180"
                     class="chat-logo">
@@ -434,25 +454,6 @@
             if (isDark) document.body.classList.add('dark-mode');
             updateIcons(isDark);
             chatBox.scrollTop = chatBox.scrollHeight;
-        });
-
-        // Pré-visualização da imagem
-        const imageUpload = document.getElementById('chat-image-upload');
-        imageUpload.addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    let preview = document.querySelector('.chat-imagem-preview');
-                    if (!preview) {
-                        preview = document.createElement('img');
-                        preview.classList.add('chat-imagem-preview');
-                        imageUpload.parentNode.insertBefore(preview, imageUpload);
-                    }
-                    preview.src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
         });
     </script>
 </body>
