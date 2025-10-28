@@ -670,8 +670,8 @@
 
             <!-- Ícone azul do chat -->
             @auth
-                <!-- Usuário logado: vai para o chat -->
-                <a href="{{ route('chat.index') }}" class="chat-float" title="Abrir Chat">
+                <!-- Usuário logado: vai para apresentação primeiro -->
+                <a href="{{ route('chat.apresentacao') }}" class="chat-float" title="Abrir Chat">
                     <i class="fas fa-comment-dots"></i>
                 </a>
             @else

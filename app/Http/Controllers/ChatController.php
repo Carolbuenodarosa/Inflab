@@ -8,25 +8,26 @@ use Illuminate\Http\Request;
 class ChatController extends Controller
 {
     /**
-     * Exibe a lista de registros.
+     * Página de apresentação antes do chat
+     */
+    public function apresentacao()
+    {
+        return view('apresentacao'); // resources/views/apresentacao.blade.php
+    }
+
+    /**
+     * Exibe a lista de mensagens do chat
      */
     public function index()
     {
-        //
-        $messages = Message::orderBy('created_at', 'desc')->get(); // mensagens mais novas primeiro
+        // Busca todas as mensagens, da mais antiga para a mais recente
+        $messages = Message::orderBy('created_at', 'asc')->get();
+
         return view('chat', compact('messages'));
     }
 
     /**
-     * Mostra o formulário de criação.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Salva um novo registro.
+     * Salva uma nova mensagem
      */
     public function store(Request $request)
     {
@@ -71,33 +72,30 @@ class ChatController extends Controller
 
         return redirect()->back();
     }
+
     /**
-     * Exibe um registro específico.
+     * Métodos reservados para CRUD (não implementados ainda)
      */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Mostra o formulário de edição.
-     */
+    public function create()
+    {
+        //
+    }
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Atualiza um registro existente.
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove um registro.
-     */
     public function destroy($id)
     {
         //
