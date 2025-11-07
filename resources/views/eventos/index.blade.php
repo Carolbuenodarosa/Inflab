@@ -541,6 +541,7 @@
                 <button class="filter-btn" data-filter="treinamento">Treinamentos</button>
                 <button class="filter-btn" data-filter="exposicao">Exposições</button>
                 @auth
+                <-- verificação de usuario para adicionar evento-->
                     @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com')
                         <a href="{{ route('eventos.create') }}" class="Eventos-btn-componente">
                             Cadastrar Novo Evento
