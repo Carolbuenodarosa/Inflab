@@ -706,11 +706,12 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('home') }}#servicos">Serviços</a></li>
                     <li><a href="{{ route('eventos.index') }}">Eventos</a></li>
-                    <li><a href="#agendamento">Agendamento</a></li>
-                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="{{ route('home') }}#agendamento">Agendamento</a></li>
+                    <li><a href="{{ route('home') }}#contato">Contato</a></li>
+
 
                     @guest
                         <a href="{{ route('login') }}" class="btn-blue">Login</a>

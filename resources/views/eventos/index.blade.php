@@ -521,7 +521,7 @@
     <div class="page-header">
         <h2>Eventos e Atividades</h2>
         <ul class="breadcrumb">
-            <li><a href="inflab.html">Início</a></li>
+            <li><a href="{{ route('home') }}">Início</a></li>
             <li>Eventos</li>
         </ul>
     </div>
@@ -540,15 +540,16 @@
                 <button class="filter-btn" data-filter="workshop">Workshops</button>
                 <button class="filter-btn" data-filter="treinamento">Treinamentos</button>
                 <button class="filter-btn" data-filter="exposicao">Exposições</button>
-                @auth
-                    <-- verificação de usuario para adicionar evento-->
-                        @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com' ||
-                                strtolower(Auth::user()->email) === 'fernandes.junior@ifpr.edu.br')
-                            <a href="{{ route('eventos.create') }}" class="Eventos-btn-componente">
-                                Cadastrar Novo Evento
-                            </a>
-                        @endif
-                    @endauth
+               @auth
+                    <!-- Verificação de usuário para adicionar evento -->
+                    @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com' ||
+                            strtolower(Auth::user()->email) === 'fernandes.junior@ifpr.edu.br' ||
+                            strtolower(Auth::user()->email) === 'jean.gentilini@ifpr.edu.br')
+                        <a href="{{ route('eventos.create') }}" class="Eventos-btn-componente">
+                            Cadastrar Novo Evento
+                        </a>
+                    @endif
+                @endauth
 
             </div>
             <!--Eventos-->

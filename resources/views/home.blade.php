@@ -10,7 +10,7 @@
     <style>
         :root {
             --ifpr-blue: #0056a3;
-            --ifpr-light-blue: #0078d4;
+            --ifpr-light-blue: #20567f;
             --ifpr-dark-blue: #003d7a;
             --ifpr-gray: #f5f5f5;
             --ifpr-text: #333;
@@ -556,6 +556,38 @@
             color: #aaa;
         }
 
+        .btn-ir-maquinas {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #165293, #194e9e);
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 91, 230, 0.3);
+            transition: all 0.25s ease-in-out;
+        }
+
+        .btn-ir-maquinas:hover {
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 91, 230, 0.45);
+            color: #233e86;
+            border:2px solid rgb(30, 67, 102);
+        }
+
+        .btn-ir-maquinas:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 91, 230, 0.25);
+        }
+
+        .btn-ir-maquinas i {
+            font-size: 18px;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .about-content {
@@ -644,7 +676,7 @@
             justify-content: center;
             width: 50px;
             height: 50px;
-            background-color: #007bff;
+            background-color: #154a7d;
             /* azul */
             color: white;
             border-radius: 50%;
@@ -654,7 +686,7 @@
         }
 
         .chat-icon:hover {
-            background-color: #0056b3;
+            background-color: #1b589a;
             /* azul mais escuro ao passar o mouse */
         }
     </style>
@@ -717,6 +749,12 @@
             <div class="section-title">
                 <h2>Serviços e Recursos</h2>
                 <p>Conheça nossos equipamentos e áreas de atuação</p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="{{ route('maquinas') }}" class="btn-ir-maquinas">
+                        <i class="fa-solid fa-gears"></i> Ir para Máquinas
+                    </a>
+                </div>
+
             </div>
             <div class="services-grid">
                 <div class="service-card">
@@ -1022,94 +1060,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <div class="footer-logo">
-                        <svg id="marca-ifpr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 235 54" role="img"
-                            aria-label="Instituto Federal do Paraná">
-                            <title>Instituto Federal do Paraná</title>
-                            <desc>Marca do IFPR</desc>
-                            <path fill="#2f9e41"
-                                d="M37.4 36.4c0 0.6-0.5 1.1-1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V36.4z">
-                            </path>
-                            <path fill="#2f9e41"
-                                d="M24.4 10.3c0 0.6-0.5 1.1-1.1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1V1.6c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V10.3z">
-                            </path>
-                            <path fill="#2f9e41"
-                                d="M37.4 10.3c0 0.6-0.5 1.1-1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1V1.6c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V10.3z">
-                            </path>
-                            <path fill="#2f9e41"
-                                d="M11.4 23.3c0 0.6-0.5 1.1-1.1 1.1H1.6c-0.6 0-1-0.5-1-1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V23.3z">
-                            </path>
-                            <path fill="#2f9e41"
-                                d="M24.4 23.3c0 0.6-0.5 1.1-1.1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V23.3z">
-                            </path>
-                            <path fill="#2f9e41"
-                                d="M11.4 36.4c0 0.6-0.5 1.1-1.1 1.1H1.6c-0.6 0-1-0.5-1-1.1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V36.4z">
-                            </path>
-                            <path fill="#2f9e41"
-                                d="M24.4 36.4c0 0.6-0.5 1.1-1.1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V36.4z">
-                            </path>
-                            <path fill="#2f9e41"
-                                d="M11.4 49.4c0 0.6-0.5 1.1-1.1 1.1H1.6c-0.6 0-1-0.5-1-1.1v-8.7c0-0.6 0.5-1 1.1-1h8.7c0.6 0 1.1 0.5 1.1 1.1V49.4z">
-                            </path>
-                            <path fill="#2f9e41"
-                                d="M24.4 49.4c0 0.6-0.5 1.1-1.1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1v-8.7c0-0.6 0.5-1 1.1-1h8.7c0.6 0 1.1 0.5 1.1 1.1V49.4z">
-                            </path>
-                            <path fill="#ce181e"
-                                d="M11.9 6c0 3.3-2.7 6-6 6C2.7 11.9 0 9.3 0 6S2.7 0 6 0C9.3 0 11.9 2.7 11.9 6"></path>
-                            <text transform="matrix(1.0017 0 0 1 43.6553 24.1582)" fill="#black"
-                                font-family="Arial, sans-serif" font-size="14" font-weight="bold">INSTITUTO
-                                FEDERAL</text>
-                            <text transform="matrix(1.0017 0 0 1 43.9331 37.5249)" fill="#black"
-                                font-family="Arial, sans-serif" font-size="12" font-weight="bold">Paraná</text>
-                            <text transform="matrix(1.0017 0 0 1 43.9326 50.5059)" fill="#black"
-                                font-family="Arial, sans-serif" font-size="12">Campus Palmas</text>
-                        </svg>
-                        <h3>IFPR Campus Palmas</h3>
-                    </div>
-                    <p>O IFLAB é um laboratório de fabricação digital e prototipagem do Instituto Federal do Paraná,
-                        Campus Palmas, dedicado a apoiar projetos de inovação e tecnologia.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
 
-                <div class="footer-links">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="#sobre">Sobre o IFLAB</a></li>
-                        <li><a href="#servicos">Serviços</a></li>
-                        <li><a href="#eventos">Eventos</a></li>
-                        <li><a href="#agendamento">Agendamento</a></li>
-                        <li><a href="#contato">Contato</a></li>
-                        <li><a href="#">Regulamento de Uso</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Institucional</h4>
-                    <ul>
-                        <li><a href="#">IFPR Campus Palmas</a></li>
-                        <li><a href="#">Biblioteca</a></li>
-                        <li><a href="#">Editais</a></li>
-                        <li><a href="#">Eventos</a></li>
-                        <li><a href="#">Ouvidoria</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="copyright">
-                <p>&copy; 2023 IFPR Campus Palmas - IFLAB. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
 
     <script>
         // Form submission
@@ -1161,5 +1112,6 @@
     </script>
 
 </body>
+@include('layouts.footer')
 
 </html>

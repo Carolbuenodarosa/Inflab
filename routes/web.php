@@ -54,3 +54,10 @@ Route::get('/chat/messages', [ChatController::class, 'getMessages'])->name('chat
 use App\Http\Controllers\BookingController;
 
 Route::post('/agendamento', [BookingController::class, 'store'])->name('booking.store');
+
+Route::get('/maquinas', function () {
+    return view('maquinas');
+})->name('maquinas');
+
+
+
