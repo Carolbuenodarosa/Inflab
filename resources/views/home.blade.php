@@ -576,7 +576,7 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(0, 91, 230, 0.45);
             color: #233e86;
-            border:2px solid rgb(30, 67, 102);
+            border: 2px solid rgb(30, 67, 102);
         }
 
         .btn-ir-maquinas:active {
@@ -869,8 +869,9 @@
                         <h3>Visita Técnica - Escola Estadual Palmas</h3>
                         <p>Recebemos 40 alunos da Escola Estadual Palmas para uma visita técnica ao laboratório, com
                             demonstrações de impressão 3D e robótica educacional.</p>
-                        <a href="eventos.html#visita-15-10-2023" class="event-link">Ver detalhes <i
-                                class="fas fa-arrow-right"></i></a>
+                        <a href="{{ route('visitas') }}#visita-15-10-2023" class="event-link">
+                            Ver detalhes <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -884,8 +885,10 @@
                         <h3>Workshop de Introdução à Manufatura Digital</h3>
                         <p>Ministramos um workshop sobre os conceitos básicos de manufatura digital, com foco em
                             modelagem 3D e impressão para iniciantes.</p>
-                        <a href="eventos.html#workshop-05-10-2023" class="event-link">Ver detalhes <i
-                                class="fas fa-arrow-right"></i></a>
+                        <a href="{{ route('workshop') }}" class="event-link">
+                            Ver detalhes <i class="fas fa-arrow-right"></i>
+                            </i></a>
+
                     </div>
                 </div>
 
@@ -899,8 +902,11 @@
                         <h3>Treinamento em Arduino para Professores</h3>
                         <p>Capacitamos 15 professores da rede pública no uso de plataformas Arduino para aplicações
                             educacionais em sala de aula.</p>
-                        <a href="eventos.html#treinamento-28-09-2023" class="event-link">Ver detalhes <i
-                                class="fas fa-arrow-right"></i></a>
+                        <a href="{{ route('treinamentos') }}" class="event-link">
+                            Ver detalhes <i class="fas fa-arrow-right"></i>
+                        </a>
+
+
                     </div>
                 </div>
             </div>

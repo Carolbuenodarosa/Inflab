@@ -59,5 +59,20 @@ Route::get('/maquinas', function () {
     return view('maquinas');
 })->name('maquinas');
 
+Route::get('/visitas', function () {
+    return view('visitas');
+})->name('visitas');
+
+Route::get('/workshop', function () {
+    return view('workshop');
+})->name('workshop');
+
+Route::get('/treinamentos', function () {
+    return view('treinamentos');
+})->name('treinamentos');
+
+
+
+
 
 
