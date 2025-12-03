@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    @include('layouts.cabecalho')
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Máquinas e Recursos | IFLAB - IFPR Palmas</title>
+
+    <!-- FONTES E ÍCONES -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+        }
+
+        /* ===== TÍTULO PRINCIPAL ===== */
+        h1.page-title {
+            text-align: center;
+            font-weight: 800;
+            color: #0a6cc4;
+            margin-top: 25px;
+            margin-bottom: 5px;
+            font-size: 42px;
+            letter-spacing: -1px;
+        }
+
+        p.page-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #4b4b4b;
+            margin-top: 0;
+            margin-bottom: 45px;
+        }
+
+        /* ===== CARD HORIZONTAL ===== */
+        .machine-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin: 0 auto 30px auto;
+            max-width: 1100px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .machine-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .machine-box img {
+            width: 340px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        /* ===== CAIXA DE TEXTO ===== */
+        .box-content {
+            flex: 1;
+            border: 2px solid #dcdcdc;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        .box-title {
+            background: #0a6cc4;
+            color: white;
+            padding: 18px;
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .box-text {
+            padding: 18px;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.7;
+            min-height: 120px;
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 850px) {
+            body {
+                padding: 15px;
+            }
+
+            .machine-box {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .machine-box img {
+                width: 100%;
+                height: auto;
+            }
+
+            .box-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="page-title">Robotica</h1>
+    <p class="page-subtitle">Infraestrutura tecnológica do IFPR Palmas para inovação, prototipagem e pesquisa aplicada
+    </p>
+
+    <div class="machine-box">
+        <img src="https://blog.eletrogate.com/wp-content/uploads/2020/07/Sem-Titulo-1-Recuperado.jpg">
+        <div class="box-content">
+            <div class="box-title">ROBÔ SEGUIDOR DE LINHA</div>
+            <div class="box-text">
+                Um robô seguidor de linha é um dispositivo automatizado projetado para detectar e seguir um trajeto
+                marcado no chão, geralmente uma linha preta ou branca. Ele utiliza sensores ópticos para identificar o
+                caminho e ajustar seus movimentos, mantendo-se sobre a rota. É muito usado em atividades educacionais,
+                competições de robótica e estudos de lógica de controle.
+            </div>
+        </div>
+    </div>
+
+    <div class="machine-box">
+        <img src="https://embarcacoes.ic.unicamp.br/imgs/posts/microcontroladores/microcontroladores.jpg">
+        <div class="box-content">
+            <div class="box-title">SENSORES PARA MICROCONTROLADORES</div>
+            <div class="box-text">
+                Sensores para microcontroladores são dispositivos que detectam variáveis físicas — como temperatura,
+                luz, umidade, distância, movimento ou pressão — e convertem essas informações em sinais elétricos
+                compreensíveis pelo microcontrolador. Eles permitem que sistemas eletrônicos percebam o ambiente e tomem
+                decisões automatizadas, sendo amplamente utilizados em projetos educacionais, automação, robótica e
+                Internet das Coisas (IoT).
+            </div>
+        </div>
+    </div>
+
+    <div class="machine-box">
+        <img src="https://edu.ieee.org/br-ufcgras/wp-content/uploads/sites/243/arduino-1128227_1280.jpg">
+        <div class="box-content">
+            <div class="box-title">MICROCONTROLADORES</div>
+            <div class="box-text">
+                Microcontroladores são pequenos computadores integrados em um único chip, contendo processador, memória
+                e periféricos. Eles são projetados para controlar dispositivos eletrônicos de forma automática,
+                executando tarefas específicas em sistemas embarcados. Muito utilizados em automação, robótica,
+                eletrodomésticos, IoT e projetos educacionais, permitem criar soluções inteligentes e de baixo consumo
+                de energia.
+            </div>
+        </div>
+    </div>
+
+    <div class="machine-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6gOpw5vE-hIhtYoNz9Il7Ti2OnykgUOLDew&s">
+        <div class="box-content">
+            <div class="box-title">ROBÔ DE SUMÔ</div>
+            <div class="box-text">
+                Um robô de sumô é um robô autônomo projetado para competir em arenas circulares, onde o objetivo é
+                empurrar o oponente para fora do ringue. Ele utiliza sensores para detectar bordas e localizar o
+                adversário, além de motores potentes e estrutura reforçada para garantir força e estabilidade. É muito
+                usado em competições de robótica, desenvolvendo habilidades de estratégia, eletrônica e programação.
+            </div>
+        </div>
+    </div>
+
+    <div class="machine-box">
+        <img src="https://loja.superimportadora.com.br/wp-content/uploads/2023/08/drone-dji-agras-t25.jpg">
+        <div class="box-content">
+            <div class="box-title">DRONE</div>
+            <div class="box-text">
+                Um drone é um veículo aéreo não tripulado, controlado remotamente ou de forma autônoma, capaz de
+                realizar voos estáveis por meio de múltiplos rotores. Ele é utilizado para captação de imagens,
+                inspeções, mapeamentos, lazer e diversas aplicações profissionais. Sua estrutura leve, sensores
+                integrados e sistemas de controle permitem manobrabilidade, precisão e segurança durante o voo.
+            </div>
+        </div>
+    </div>
+
+    <div class="machine-box">
+        <img src="https://blog.avell.com.br/wp-content/uploads/2025/05/Adobe-Premiere-Pro-1024x573.png">
+        <div class="box-content">
+            <div class="box-title">SOFTWARES PARA EDICÇÃO E CONTROLE</div>
+            <div class="box-text">
+                Softwares para edição e controle são programas utilizados para criar, modificar, organizar e gerenciar
+                diferentes tipos de conteúdo ou processos. Eles podem incluir ferramentas de edição de texto, imagem,
+                áudio e vídeo, além de sistemas para controle de produção, automação, projetos ou dispositivos. Esses
+                softwares facilitam o trabalho, aumentam a precisão e permitem maior eficiência em diversas áreas
+                profissionais e educacionais.
+            </div>
+        </div>
+    </div>
+
+    @include('layouts.footer')
+
+</body>
+
+</html>

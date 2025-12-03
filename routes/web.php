@@ -1,17 +1,26 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\BookingController;
+use App\Models\Evento;
 
-// Rota da Home
+// -----------------------------------------------------
+// 🔹 HOME — Envia $eventos para a página home.blade.php
+// -----------------------------------------------------
 Route::get('/', function () {
-    return view('home');
+    $eventos = Evento::orderBy('data_evento', 'asc')->get();
+    return view('home', compact('eventos')); // 👈 CORRETO
 })->name('home');
 
-// CRUD de eventos
+
+// -----------------------------------------------------
+// 🔹 CRUD DE EVENTOS
+// -----------------------------------------------------
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
 Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
 Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');
@@ -20,7 +29,10 @@ Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('eventos.
 Route::delete('/eventos/{id}', [EventoController::class, 'destroy'])->name('eventos.destroy');
 Route::get('/eventos/{id}', [EventoController::class, 'show'])->name('eventos.show');
 
-// Autenticação
+
+// -----------------------------------------------------
+// 🔹 AUTENTICAÇÃO
+// -----------------------------------------------------
 Route::get('/register', [RegisteredUserController::class, 'create'])
     ->middleware('guest')
     ->name('register');
@@ -39,40 +51,34 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
 
-use App\Http\Controllers\ChatController;
-// Apenas usuários autenticados podem acessar
-
-Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');   // 🔹 Ler mensagens
-Route::post('/chat', [ChatController::class, 'store'])->name('chat.store'); // 🔹 Gravar nova mensagem
+// -----------------------------------------------------
+// 🔹 CHAT
+// -----------------------------------------------------
+Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+Route::post('/chat', [ChatController::class, 'store'])->name('chat.store');
 Route::get('/chat/messages', [ChatController::class, 'getMessages'])->name('chat.messages');
 
 
-use App\Http\Controllers\BookingController;
-
+// -----------------------------------------------------
+// 🔹 AGENDAMENTO
+// -----------------------------------------------------
 Route::post('/agendamento', [BookingController::class, 'store'])->name('booking.store');
 
-Route::get('/maquinas', function () {
-    return view('maquinas');
-})->name('maquinas');
 
-Route::get('/visitas', function () {
-    return view('visitas');
-})->name('visitas');
+// -----------------------------------------------------
+// 🔹 PÁGINAS SIMPLES
+// -----------------------------------------------------
+Route::view('/maquinas', 'maquinas')->name('maquinas');
+Route::view('/visitas', 'visitas')->name('visitas');
+Route::view('/workshop', 'workshop')->name('workshop');
+Route::view('/treinamentos', 'treinamentos')->name('treinamentos');
+Route::view('/eletronica', 'eletronica')->name('eletronica');
+Route::view('/robotica', 'robotica')->name('robotica');
+Route::view('/marcenaria', 'marcenaria')->name('marcenaria');
+Route::view('/usinagem', 'usinagem')->name('usinagem');
+Route::view('/comunidade', 'comunidade')->name('comunidade');
 
-Route::get('/workshop', function () {
-    return view('workshop');
-})->name('workshop');
-
-Route::get('/treinamentos', function () {
-    return view('treinamentos');
-})->name('treinamentos');
-
-
-
-
-
-
+Route::get('/bem-vindo', function () {
+    return view('bem'); // Aponta para resources/views/bem.blade.php
+})->middleware('auth')->name('bem');

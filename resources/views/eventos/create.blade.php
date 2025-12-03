@@ -1,3 +1,4 @@
+@include('layouts.cabecalho')
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,39 +6,62 @@
     <meta charset="UTF-8">
     <title>Cadastrar Evento</title>
     <style>
-        body {
+        /* Encapsular todo o CSS dentro de .evento-form-page */
+        .evento-form-page {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
             padding: 30px;
         }
 
-        h2 {
+        .evento-form-page h2 {
             text-align: center;
             color: #333;
+            margin-bottom: 20px;
         }
 
-        form {
+        .evento-form-page .back-btn {
+            max-width: 500px;
+            margin: 0 auto 20px;
+            text-align: left;
+        }
+
+        .evento-form-page .back-btn button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .evento-form-page .back-btn button:hover {
+            background-color: #5a6268;
+        }
+
+        .evento-form-page form {
             background-color: #fff;
             max-width: 500px;
-            margin: 20px auto;
+            margin: 0 auto;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        label {
+        .evento-form-page label {
             font-weight: bold;
             display: block;
             margin-bottom: 5px;
             color: #555;
         }
 
-        input[type="text"],
-        input[type="date"],
-        input[type="time"],
-        input[type="file"],
-        select,
-        textarea {
+        .evento-form-page input[type="text"],
+        .evento-form-page input[type="date"],
+        .evento-form-page input[type="time"],
+        .evento-form-page input[type="file"],
+        .evento-form-page select,
+        .evento-form-page textarea {
             width: 100%;
             padding: 8px 10px;
             margin-bottom: 15px;
@@ -47,11 +71,11 @@
             font-size: 14px;
         }
 
-        textarea {
+        .evento-form-page textarea {
             resize: vertical;
         }
 
-        button {
+        .evento-form-page button[type="submit"] {
             background-color: #007bff;
             color: white;
             border: none;
@@ -62,110 +86,107 @@
             transition: background-color 0.3s;
         }
 
-        button:hover {
+        .evento-form-page button[type="submit"]:hover {
             background-color: #0056b3;
         }
 
-        .alert {
+        .evento-form-page .alert {
             padding: 10px;
             margin-bottom: 15px;
             border-radius: 5px;
         }
 
-        .alert-success {
+        .evento-form-page .alert-success {
             background-color: #d4edda;
             color: #155724;
         }
 
-        .alert-error {
+        .evento-form-page .alert-error {
             background-color: #f8d7da;
             color: #721c24;
         }
 
-        ul {
+        .evento-form-page ul {
             margin: 0;
             padding-left: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .evento-form-page form {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <h2>Cadastrar Evento</h2>
-    <div style="max-width: 500px; margin: 0 auto 20px; text-align: left;">
-        <a href="{{ route('home') }}">
-            <button type="button"
-                style="
-                background-color: #6c757d;
-                color: white;
-                border: none;
-                padding: 8px 16px;
-                font-size: 14px;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            "
-                onmouseover="this.style.backgroundColor='#5a6268'" onmouseout="this.style.backgroundColor='#6c757d'">
-                ← Voltar para Home
-            </button>
-        </a>
+    <div class="evento-form-page">
+        <h2>Cadastrar Evento</h2>
+
+        <div class="back-btn">
+            <a href="{{ route('home') }}">
+                <button type="button">← Voltar para Home</button>
+            </a>
+        </div>
+
+        <!-- Exibir mensagens de erro -->
+        @if ($errors->any())
+            <div class="alert alert-error">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <form action="{{ route('eventos.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <label for="titulo">Título:</label>
+            <input type="text" name="titulo" id="titulo" required>
+
+            <label for="categoria">Categoria:</label>
+            <select name="categoria" id="categoria" required>
+                <option value="">Selecione uma categoria</option>
+                <option value="visita">Visitas</option>
+                <option value="workshops">Workshops</option>
+                <option value="Treinamentos">Treinamentos</option>
+                <option value="Exposições">Exposições</option>
+            </select>
+
+            <label for="descricao">Descrição:</label>
+            <textarea name="descricao" id="descricao" rows="3"></textarea>
+
+            <label for="data_evento">Data do Evento:</label>
+            <input type="date" name="data_evento" id="data_evento" required>
+
+            <label for="hora_evento">Hora do Evento:</label>
+            <input type="time" name="hora_evento" id="hora_evento">
+
+            <label for="local">Local:</label>
+            <input type="text" name="local" id="local">
+
+            <label for="status">Status:</label>
+            <select name="status" id="status">
+                <option value="ativo">Ativo</option>
+                <option value="cancelado">Cancelado</option>
+                <option value="concluido">Concluído</option>
+            </select>
+
+            <label for="imagem">Imagem do Evento:</label>
+            <input type="file" name="imagem" id="imagem">
+
+            <button type="submit">Cadastrar</button>
+        </form>
     </div>
-
-    <!-- Exibir mensagens de erro -->
-    @if ($errors->any())
-        <div class="alert alert-error">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <form action="{{ route('eventos.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-
-        <label for="titulo">Título:</label>
-        <input type="text" name="titulo" id="titulo" required>
-
-        <label for="categoria">Categoria:</label>
-        <select name="categoria" id="categoria" required>
-            <option value="">Selecione uma categoria</option>
-            <option value="visita">visitas</option>
-            <option value="workshops">workshops</option>
-            <option value="Treinamentos">Treinamentos</option>
-            <option value="Exposições">Exposições</option>
-        </select>
-
-        <label for="descricao">Descrição:</label>
-        <textarea name="descricao" id="descricao" rows="3"></textarea>
-
-        <label for="data_evento">Data do Evento:</label>
-        <input type="date" name="data_evento" id="data_evento" required>
-
-        <label for="hora_evento">Hora do Evento:</label>
-        <input type="time" name="hora_evento" id="hora_evento">
-
-        <label for="local">Local:</label>
-        <input type="text" name="local" id="local">
-
-        <label for="status">Status:</label>
-        <select name="status" id="status">
-            <option value="ativo">Ativo</option>
-            <option value="cancelado">Cancelado</option>
-            <option value="concluido">Concluído</option>
-        </select>
-
-        <label for="imagem">Imagem do Evento:</label>
-        <input type="file" name="imagem" id="imagem">
-
-        <button type="submit">Cadastrar</button>
-    </form>
 </body>
+@include('layouts.footer')
 
 </html>

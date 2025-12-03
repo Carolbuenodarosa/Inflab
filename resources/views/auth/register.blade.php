@@ -1,7 +1,7 @@
 <div class="register-wrapper">
     <div class="register-card">
         <!-- Botão Voltar -->
-        <a href="{{ route('home') }}" class="back-btn">← Voltar</a>
+        <a href="{{ route('eventos.index') }}" class="back-btn">← Voltar</a>
 
         <h2 class="form-title">Criar Conta</h2>
 
