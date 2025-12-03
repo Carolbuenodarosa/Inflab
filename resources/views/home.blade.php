@@ -531,7 +531,6 @@
                                 às {{ \Carbon\Carbon::parse($evento->hora_evento)->format('H:i') }}
                             </span>
                             <h3>{{ $evento->titulo }}</h3>
-                            <p>{{ $evento->descricao }}</p>
                             <p><strong>Local:</strong> {{ $evento->local }}</p>
                         </div>
                     </a>
