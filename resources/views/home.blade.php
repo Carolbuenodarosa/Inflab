@@ -773,14 +773,26 @@
         const nextBtn = document.querySelector('.carousel-btn.next');
 
         let index = 0;
-        const itemsPerView = 3;
+
+        function getItemsPerView() {
+            const width = window.innerWidth;
+            if (width <= 600) return 1;
+            if (width <= 992) return 2;
+            return 3;
+        }
 
         function updateCarousel() {
-            const itemWidth = items[0].offsetWidth + 20; // largura + gap
+            const itemsPerView = getItemsPerView();
+            const itemStyle = getComputedStyle(items[0]);
+            const itemWidth = items[0].offsetWidth + parseInt(itemStyle.marginRight);
             track.style.transform = `translateX(-${index * itemWidth}px)`;
+            // Ajusta index se ultrapassar
+            if (index > items.length - itemsPerView) index = items.length - itemsPerView;
+            if (index < 0) index = 0;
         }
 
         nextBtn.addEventListener('click', () => {
+            const itemsPerView = getItemsPerView();
             if (index < items.length - itemsPerView) {
                 index++;
                 updateCarousel();
@@ -795,6 +807,9 @@
         });
 
         window.addEventListener('resize', updateCarousel);
+
+        // Inicializa
+        updateCarousel();
     </script>
 
     <script defer>

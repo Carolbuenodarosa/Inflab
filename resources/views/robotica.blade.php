@@ -37,16 +37,24 @@
             margin-bottom: 45px;
         }
 
-        /* ===== CARD HORIZONTAL ===== */
+        /* ===== GRID DE CARDS ===== */
+        .machines-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 colunas no desktop */
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+            padding: 0 15px;
+        }
+
+        /* ===== CARD ===== */
         .machine-box {
             display: flex;
-            align-items: center;
-            gap: 20px;
+            flex-direction: column;
             background: white;
-            padding: 25px;
             border-radius: 18px;
-            margin: 0 auto 30px auto;
-            max-width: 1100px;
+            overflow: hidden;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             transition: 0.3s;
         }
@@ -57,57 +65,50 @@
         }
 
         .machine-box img {
-            width: 340px;
-            height: 240px;
+            width: 100%;
+            height: 200px;
             object-fit: cover;
-            border-radius: 14px;
         }
 
-        /* ===== CAIXA DE TEXTO ===== */
         .box-content {
+            padding: 18px;
             flex: 1;
-            border: 2px solid #dcdcdc;
-            border-radius: 18px;
-            overflow: hidden;
-            background: #ffffff;
+            /* altura uniforme */
+            display: flex;
+            flex-direction: column;
         }
 
         .box-title {
             background: #0a6cc4;
             color: white;
-            padding: 18px;
-            font-size: 22px;
+            padding: 15px;
+            font-size: 20px;
             font-weight: 700;
             text-align: center;
             letter-spacing: 1px;
+            border-radius: 10px 10px 0 0;
         }
 
         .box-text {
-            padding: 18px;
+            margin-top: 12px;
             font-size: 16px;
             color: #333;
-            line-height: 1.7;
-            min-height: 120px;
+            line-height: 1.6;
+            flex: 1;
         }
 
         /* ===== RESPONSIVIDADE ===== */
-        @media (max-width: 850px) {
-            body {
-                padding: 15px;
+        @media (max-width: 992px) {
+            .machines-container {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 colunas em tablets */
             }
+        }
 
-            .machine-box {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .machine-box img {
-                width: 100%;
-                height: auto;
-            }
-
-            .box-content {
-                width: 100%;
+        @media (max-width: 600px) {
+            .machines-container {
+                grid-template-columns: 1fr;
+                /* 1 coluna em celulares */
             }
         }
     </style>
@@ -115,87 +116,96 @@
 
 <body>
 
-    <h1 class="page-title">Robotica</h1>
+    <h1 class="page-title">Robótica</h1>
     <p class="page-subtitle">Infraestrutura tecnológica do IFPR Palmas para inovação, prototipagem e pesquisa aplicada
     </p>
 
-    <div class="machine-box">
-        <img src="https://blog.eletrogate.com/wp-content/uploads/2020/07/Sem-Titulo-1-Recuperado.jpg">
-        <div class="box-content">
-            <div class="box-title">ROBÔ SEGUIDOR DE LINHA</div>
-            <div class="box-text">
-                Um robô seguidor de linha é um dispositivo automatizado projetado para detectar e seguir um trajeto
-                marcado no chão, geralmente uma linha preta ou branca. Ele utiliza sensores ópticos para identificar o
-                caminho e ajustar seus movimentos, mantendo-se sobre a rota. É muito usado em atividades educacionais,
-                competições de robótica e estudos de lógica de controle.
+    <div class="machines-container">
+        <!-- ROBÔ SEGUIDOR DE LINHA -->
+        <div class="machine-box">
+            <img src="https://blog.eletrogate.com/wp-content/uploads/2020/07/Sem-Titulo-1-Recuperado.jpg">
+            <div class="box-content">
+                <div class="box-title">ROBÔ SEGUIDOR DE LINHA</div>
+                <div class="box-text">
+                    Um robô seguidor de linha é um dispositivo automatizado projetado para detectar e seguir um trajeto
+                    marcado no chão, geralmente uma linha preta ou branca. Ele utiliza sensores ópticos para identificar
+                    o caminho e ajustar seus movimentos, mantendo-se sobre a rota. É muito usado em atividades
+                    educacionais, competições de robótica e estudos de lógica de controle.
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="machine-box">
-        <img src="https://embarcacoes.ic.unicamp.br/imgs/posts/microcontroladores/microcontroladores.jpg">
-        <div class="box-content">
-            <div class="box-title">SENSORES PARA MICROCONTROLADORES</div>
-            <div class="box-text">
-                Sensores para microcontroladores são dispositivos que detectam variáveis físicas — como temperatura,
-                luz, umidade, distância, movimento ou pressão — e convertem essas informações em sinais elétricos
-                compreensíveis pelo microcontrolador. Eles permitem que sistemas eletrônicos percebam o ambiente e tomem
-                decisões automatizadas, sendo amplamente utilizados em projetos educacionais, automação, robótica e
-                Internet das Coisas (IoT).
+        <!-- SENSORES PARA MICROCONTROLADORES -->
+        <div class="machine-box">
+            <img src="https://embarcacoes.ic.unicamp.br/imgs/posts/microcontroladores/microcontroladores.jpg">
+            <div class="box-content">
+                <div class="box-title">SENSORES PARA MICROCONTROLADORES</div>
+                <div class="box-text">
+                    Sensores para microcontroladores são dispositivos que detectam variáveis físicas — como temperatura,
+                    luz, umidade, distância, movimento ou pressão — e convertem essas informações em sinais elétricos
+                    compreensíveis pelo microcontrolador. Eles permitem que sistemas eletrônicos percebam o ambiente e
+                    tomem decisões automatizadas, sendo amplamente utilizados em projetos educacionais, automação,
+                    robótica e Internet das Coisas (IoT).
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="machine-box">
-        <img src="https://edu.ieee.org/br-ufcgras/wp-content/uploads/sites/243/arduino-1128227_1280.jpg">
-        <div class="box-content">
-            <div class="box-title">MICROCONTROLADORES</div>
-            <div class="box-text">
-                Microcontroladores são pequenos computadores integrados em um único chip, contendo processador, memória
-                e periféricos. Eles são projetados para controlar dispositivos eletrônicos de forma automática,
-                executando tarefas específicas em sistemas embarcados. Muito utilizados em automação, robótica,
-                eletrodomésticos, IoT e projetos educacionais, permitem criar soluções inteligentes e de baixo consumo
-                de energia.
+        <!-- MICROCONTROLADORES -->
+        <div class="machine-box">
+            <img src="https://edu.ieee.org/br-ufcgras/wp-content/uploads/sites/243/arduino-1128227_1280.jpg">
+            <div class="box-content">
+                <div class="box-title">MICROCONTROLADORES</div>
+                <div class="box-text">
+                    Microcontroladores são pequenos computadores integrados em um único chip, contendo processador,
+                    memória e periféricos. Eles são projetados para controlar dispositivos eletrônicos de forma
+                    automática, executando tarefas específicas em sistemas embarcados. Muito utilizados em automação,
+                    robótica, eletrodomésticos, IoT e projetos educacionais, permitem criar soluções inteligentes e de
+                    baixo consumo de energia.
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="machine-box">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6gOpw5vE-hIhtYoNz9Il7Ti2OnykgUOLDew&s">
-        <div class="box-content">
-            <div class="box-title">ROBÔ DE SUMÔ</div>
-            <div class="box-text">
-                Um robô de sumô é um robô autônomo projetado para competir em arenas circulares, onde o objetivo é
-                empurrar o oponente para fora do ringue. Ele utiliza sensores para detectar bordas e localizar o
-                adversário, além de motores potentes e estrutura reforçada para garantir força e estabilidade. É muito
-                usado em competições de robótica, desenvolvendo habilidades de estratégia, eletrônica e programação.
+        <!-- ROBÔ DE SUMÔ -->
+        <div class="machine-box">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6gOpw5vE-hIhtYoNz9Il7Ti2OnykgUOLDew&s">
+            <div class="box-content">
+                <div class="box-title">ROBÔ DE SUMÔ</div>
+                <div class="box-text">
+                    Um robô de sumô é um robô autônomo projetado para competir em arenas circulares, onde o objetivo é
+                    empurrar o oponente para fora do ringue. Ele utiliza sensores para detectar bordas e localizar o
+                    adversário, além de motores potentes e estrutura reforçada para garantir força e estabilidade. É
+                    muito usado em competições de robótica, desenvolvendo habilidades de estratégia, eletrônica e
+                    programação.
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="machine-box">
-        <img src="https://loja.superimportadora.com.br/wp-content/uploads/2023/08/drone-dji-agras-t25.jpg">
-        <div class="box-content">
-            <div class="box-title">DRONE</div>
-            <div class="box-text">
-                Um drone é um veículo aéreo não tripulado, controlado remotamente ou de forma autônoma, capaz de
-                realizar voos estáveis por meio de múltiplos rotores. Ele é utilizado para captação de imagens,
-                inspeções, mapeamentos, lazer e diversas aplicações profissionais. Sua estrutura leve, sensores
-                integrados e sistemas de controle permitem manobrabilidade, precisão e segurança durante o voo.
+        <!-- DRONE -->
+        <div class="machine-box">
+            <img src="https://loja.superimportadora.com.br/wp-content/uploads/2023/08/drone-dji-agras-t25.jpg">
+            <div class="box-content">
+                <div class="box-title">DRONE</div>
+                <div class="box-text">
+                    Um drone é um veículo aéreo não tripulado, controlado remotamente ou de forma autônoma, capaz de
+                    realizar voos estáveis por meio de múltiplos rotores. Ele é utilizado para captação de imagens,
+                    inspeções, mapeamentos, lazer e diversas aplicações profissionais. Sua estrutura leve, sensores
+                    integrados e sistemas de controle permitem manobrabilidade, precisão e segurança durante o voo.
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="machine-box">
-        <img src="https://blog.avell.com.br/wp-content/uploads/2025/05/Adobe-Premiere-Pro-1024x573.png">
-        <div class="box-content">
-            <div class="box-title">SOFTWARES PARA EDICÇÃO E CONTROLE</div>
-            <div class="box-text">
-                Softwares para edição e controle são programas utilizados para criar, modificar, organizar e gerenciar
-                diferentes tipos de conteúdo ou processos. Eles podem incluir ferramentas de edição de texto, imagem,
-                áudio e vídeo, além de sistemas para controle de produção, automação, projetos ou dispositivos. Esses
-                softwares facilitam o trabalho, aumentam a precisão e permitem maior eficiência em diversas áreas
-                profissionais e educacionais.
+        <!-- SOFTWARES PARA EDIÇÃO E CONTROLE -->
+        <div class="machine-box">
+            <img src="https://blog.avell.com.br/wp-content/uploads/2025/05/Adobe-Premiere-Pro-1024x573.png">
+            <div class="box-content">
+                <div class="box-title">SOFTWARES PARA EDIÇÃO E CONTROLE</div>
+                <div class="box-text">
+                    Softwares para edição e controle são programas utilizados para criar, modificar, organizar e
+                    gerenciar diferentes tipos de conteúdo ou processos. Eles podem incluir ferramentas de edição de
+                    texto, imagem, áudio e vídeo, além de sistemas para controle de produção, automação, projetos ou
+                    dispositivos. Esses softwares facilitam o trabalho, aumentam a precisão e permitem maior eficiência
+                    em diversas áreas profissionais e educacionais.
+                </div>
             </div>
         </div>
     </div>
