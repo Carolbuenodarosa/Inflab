@@ -82,3 +82,24 @@ Route::view('/comunidade', 'comunidade')->name('comunidade');
 Route::get('/bem-vindo', function () {
     return view('bem'); // Aponta para resources/views/bem.blade.php
 })->middleware('auth')->name('bem');
+//=====================================
+//   Forum
+//=====================================
+use App\Http\Controllers\ForumController;
+
+// Lista todos os tópicos
+Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
+
+// Visualiza um tópico específico e suas conversas
+Route::get('/forum/{id}', [ForumController::class, 'show'])->name('forum.show');
+
+// Inserir uma nova conversa em um tópico
+Route::post('/forum/{id}/responder', [ForumController::class, 'responder'])->name('forum.responder');
+
+// Inserir uma nova conversa
+Route::post('/forum/{id}/responder', [ForumController::class, 'responder'])->name('forum.responder');
+
+// Criar novo tópico diretamente da index
+Route::post('/forum', [ForumController::class, 'store'])->name('forum.store');
+
+

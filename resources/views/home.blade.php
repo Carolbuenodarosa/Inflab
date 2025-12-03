@@ -299,6 +299,9 @@
 </head>
 
 <body>
+    <a href="{{ route('forum.index') }}">
+        Fórum
+    </a>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -310,7 +313,7 @@
             <!-- Ícone azul do chat -->
             @auth
                 <!-- Usuário logado: vai para o chat -->
-                <a href="{{ route('bem') }}" class="chat-float" title="Abrir Chat">
+                <a href="{{ route('forum.index') }}" class="chat-float" title="Abrir Chat">
                     <i class="fas fa-comment-dots"></i>
                 </a>
             @else
@@ -453,26 +456,13 @@
         </div>
 
     </section>
-    <!-- Page Header -->
-    <div class="filter-container">
-        @auth
-            <!-- Verificação de usuário para adicionar evento -->
-            @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com' ||
-                    strtolower(Auth::user()->email) === 'fernandes.junior@ifpr.edu.br' ||
-                    strtolower(Auth::user()->email) === 'jean.gentilini@ifpr.edu.br')
-                <a href="{{ route('eventos.create') }}" class="Eventos-btn-componente">
-                    Cadastrar Novo Evento
-                </a>
-            @endif
-        @endauth
-    </div>
     <!--Eventos-->
     <style>
         .eventos-titulo {
             text-align: center;
             font-size: 34px;
             font-weight: 800;
-            margin-top: 50px;
+            margin-top: 8px;
             margin-bottom: 35px;
             color: #2c66b2;
             font-family: "Poppins", sans-serif;
@@ -484,13 +474,11 @@
         }
 
         .eventos-titulo::after {
-            content: "";
             width: 80px;
             height: 4px;
             background: linear-gradient(90deg, #0055ff, #00c4ff);
             border-radius: 10px;
             display: block;
-            margin: 10px auto 0;
         }
 
         .card-link {
@@ -505,7 +493,9 @@
             transform: translateY(-6px);
         }
     </style>
-    <h2 class="eventos-titulo">Eventos do IFLAB</h2>
+    <section id="eventos">
+        <h2 class="eventos-titulo">Eventos IFlab</h2>
+    </section>
     <div class="carousel-container">
 
         <button class="carousel-btn prev">&#10094;</button>
@@ -539,6 +529,18 @@
         </div>
         <button class="carousel-btn next">&#10095;</button>
 
+    </div>
+    <div class="filter-container">
+        @auth
+            <!-- Verificação de usuário para adicionar evento -->
+            @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com' ||
+                    strtolower(Auth::user()->email) === 'fernandes.junior@ifpr.edu.br' ||
+                    strtolower(Auth::user()->email) === 'jean.gentilini@ifpr.edu.br')
+                <a href="{{ route('eventos.create') }}" class="Eventos-btn-componente">
+                    Cadastrar Novo Evento
+                </a>
+            @endif
+        @endauth
     </div>
 
     <!-- Booking Section -->
@@ -960,6 +962,8 @@
             });
         });
     </script>
+
+
     @include('layouts.footer')
 
 </body>

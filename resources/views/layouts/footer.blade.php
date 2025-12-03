@@ -2,35 +2,20 @@
 <footer id="footer-iflab">
     <div class="container">
         <div class="footer-content">
+
             <!-- Sobre o IFLAB -->
             <div class="footer-about">
                 <div class="footer-logo">
-                    <!-- LOGO IFPR -->
-                        <title>Instituto Federal do Paraná:Capus Palmas</title>
-                        <path fill="#2f9e41"
-                            d="M37.4 36.4c0 0.6-0.5 1.1-1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1v-8.7c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V36.4z"/>
-                        <path fill="#2f9e41"
-                            d="M24.4 10.3c0 0.6-0.5 1.1-1.1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1V1.6c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V10.3z"/>
-                        <path fill="#2f9e41"
-                            d="M37.4 10.3c0 0.6-0.5 1.1-1 1.1h-8.7c-0.6 0-1.1-0.5-1.1-1.1V1.6c0-0.6 0.5-1.1 1.1-1.1h8.7c0.6 0 1.1 0.5 1.1 1.1V10.3z"/>
-                        <path fill="#2f9e41"
-                            d="M11.9 6c0 3.3-2.7 6-6 6C2.7 11.9 0 9.3 0 6S2.7 0 6 0C9.3 0 11.9 2.7 11.9 6"/>
-                        <text transform="matrix(1.0017 0 0 1 43.6553 24.1582)" fill="black"
-                            font-family="Arial, sans-serif" font-size="14" font-weight="bold">INSTITUTO FEDERAL</text>
-                        <text transform="matrix(1.0017 0 0 1 43.9331 37.5249)" fill="black"
-                            font-family="Arial, sans-serif" font-size="12" font-weight="bold">Paraná</text>
-                        <text transform="matrix(1.0017 0 0 1 43.9326 50.5059)" fill="black"
-                            font-family="Arial, sans-serif" font-size="12">Campus Palmas</text>
-                    </svg>
                     <h3>IFPR Campus Palmas</h3>
                 </div>
-                <p>O IFLAB é um laboratório de fabricação digital e prototipagem do Instituto Federal do Paraná,
-                    Campus Palmas, dedicado a apoiar projetos de inovação e tecnologia.</p>
+
+                <p>
+                    O IFLAB é um laboratório de fabricação digital e prototipagem do Instituto Federal do Paraná,
+                    Campus Palmas, dedicado a apoiar projetos de inovação e tecnologia.
+                </p>
+
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/@ifprpalmas" target="_blank"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
 
@@ -38,12 +23,12 @@
             <div class="footer-links">
                 <h4>Links Rápidos</h4>
                 <ul>
-                    <li><a href="#sobre">Sobre o IFLAB</a></li>
-                    <li><a href="#servicos">Serviços</a></li>
-                    <li><a href="#eventos">Eventos</a></li>
-                    <li><a href="#agendamento">Agendamento</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                    <li><a href="#">Regulamento de Uso</a></li>
+                    <li><a href="/#sobre">Sobre o IFLAB</a></li>
+                    <li><a href="/#servicos">Serviços</a></li>
+                    <li><a href="/#eventos">Eventos</a></li>
+                    <li><a href="/#agendamento">Agendamento</a></li>
+                    <li><a href="/#contato">Contato</a></li>
+                    <li><a href="/regulamento.pdf" target="_blank">Regulamento de Uso</a></li>
                 </ul>
             </div>
 
@@ -51,13 +36,14 @@
             <div class="footer-links">
                 <h4>Institucional</h4>
                 <ul>
-                    <li><a href="#">IFPR Campus Palmas</a></li>
-                    <li><a href="#">Biblioteca</a></li>
-                    <li><a href="#">Editais</a></li>
-                    <li><a href="#">Eventos</a></li>
-                    <li><a href="#">Ouvidoria</a></li>
+                    <li><a href="https://palmas.ifpr.edu.br" target="_blank">IFPR Campus Palmas</a></li>
+                    <li><a href="https://www.ifpr.edu.br/palmas/biblioteca/" target="_blank">Biblioteca</a></li>
+                    <li><a href="https://www.ifpr.edu.br/editais/" target="_blank">Editais</a></li>
+                    <li><a href="https://www.ifpr.edu.br/eventos/" target="_blank">Eventos Institucionais</a></li>
+                    <li><a href="https://www.ifpr.edu.br/ouvidoria/" target="_blank">Ouvidoria</a></li>
                 </ul>
             </div>
+
         </div>
 
         <div class="copyright">
@@ -65,15 +51,14 @@
         </div>
     </div>
 
+    <!-- ESTILOS DO FOOTER -->
     <style>
-        /* Cores institucionais */
         :root {
             --ifpr-blue: #004080;
             --ifpr-light-blue: #3171b4;
             --ifpr-green: #2f9e41;
         }
 
-        /* Rodapé principal */
         #footer-iflab {
             background: var(--ifpr-blue);
             color: #fff;
@@ -83,11 +68,17 @@
         }
 
         @keyframes fadeInFooter {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Estrutura */
         #footer-iflab .footer-content {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
@@ -102,23 +93,17 @@
             margin-bottom: 20px;
         }
 
-        #footer-iflab .footer-logo svg {
-            height: 50px;
-        }
-
         #footer-iflab .footer-logo h3 {
             font-size: 1.5rem;
             font-weight: bold;
         }
 
-        /* Texto */
         #footer-iflab p {
             line-height: 1.6;
             color: #e0e0e0;
             margin-bottom: 20px;
         }
 
-        /* Links */
         #footer-iflab .footer-links h4 {
             margin-bottom: 20px;
             font-size: 1.2rem;
@@ -155,7 +140,6 @@
             color: white;
         }
 
-        /* Ícones sociais */
         #footer-iflab .social-links {
             display: flex;
             gap: 15px;
@@ -179,7 +163,6 @@
             transform: translateY(-3px);
         }
 
-        /* Direitos autorais */
         #footer-iflab .copyright {
             text-align: center;
             padding-top: 20px;
@@ -188,7 +171,6 @@
             color: #ccc;
         }
 
-        /* Responsividade */
         @media (max-width: 992px) {
             #footer-iflab .footer-content {
                 grid-template-columns: 1fr 1fr;
