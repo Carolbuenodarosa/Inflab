@@ -548,82 +548,182 @@
             <div class="section-title">
                 <h2>Como Agendar</h2>
                 <p>Siga os passos abaixo para reservar nossos equipamentos e serviços</p>
-            </div>
 
-            <div class="booking-form">
-                <h3 style="text-align: center; color: #0056a3; margin-bottom: 30px;">Formulário de Agendamento</h3>
-
-                <form id="bookingForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Nome Completo</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" name="email" required>
+                <div class="booking-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-text">
+                            <strong>Preencha seus dados pessoais</strong>
+                            <p>Informe seus dados para que possamos entrar em contato e processar sua reserva.</p>
                         </div>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="phone">Telefone</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Categoria</label>
-                            <select id="category" name="category" required>
-                                <option value="">Selecione</option>
-                                <option value="student">Estudante IFPR</option>
-                                <option value="teacher">Professor IFPR</option>
-                                <option value="external">Comunidade Externa</option>
-                                <option value="research">Projeto de Pesquisa</option>
-                            </select>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">
+                            <strong>Escolha o serviço e categoria</strong>
+                            <p>Selecione o serviço desejado e a categoria correspondente para seu projeto.</p>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="service">Serviço Desejado</label>
-                        <select id="service" name="service" required>
-                            <option value="">Selecione o serviço</option>
-                            <option value="cnc">Router CNC</option>
-                            <option value="3d">Impressão 3D</option>
-                            <option value="laser">Corte a Laser</option>
-                            <option value="eletronics">Eletrônica</option>
-                            <option value="robotics">Robótica</option>
-                            <option value="woodwork">Marcenaria</option>
-                            <option value="machining">Usinagem</option>
-                            <option value="welding">Solda</option>
-                            <option value="other">Outro</option>
-                        </select>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="date">Data Desejada</label>
-                            <input type="date" id="date" name="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="time">Horário Desejado</label>
-                            <input type="time" id="time" name="time" required>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">
+                            <strong>Selecione data e horário</strong>
+                            <p>Escolha a data e horário mais conveniente para a execução do serviço.</p>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="project">Descrição do Projeto</label>
-                        <textarea id="project" name="project"
-                            placeholder="Descreva brevemente seu projeto, objetivos e o que você pretende produzir no laboratório..." required></textarea>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-text">
+                            <strong>Descreva seu projeto e envie</strong>
+                            <p>Forneça detalhes do seu projeto para que possamos preparar tudo adequadamente.</p>
+                        </div>
                     </div>
-
-                    <div style="text-align: center;">
-                        <button type="submit" class="btn-primary">Enviar Solicitação</button>
-                    </div>
-
-                    <!-- Aqui vai aparecer a mensagem de sucesso -->
-                    <div id="formMessage" style="margin-top: 20px; text-align:center;"></div>
-                </form>
+                </div>
             </div>
         </div>
+    </section>
+
+    <style>
+        .booking-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .booking-steps .step {
+            flex: 1;
+            min-width: 220px;
+            background: #ffffff;
+            /* fundo branco */
+            border-radius: 15px;
+            text-align: center;
+            padding: 30px 20px;
+            margin: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            /* sombra leve */
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #145c93;
+            /* azul número */
+            color: #ffffff;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+        }
+
+        .step-text strong {
+            display: block;
+            color: #003366;
+            /* azul escuro */
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .step-text p {
+            font-size: 0.95rem;
+            color: #555555;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Mobile */
+        @media(max-width: 768px) {
+            .booking-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .booking-steps .step {
+                width: 85%;
+            }
+        }
+    </style>
+
+
+
+
+    <div class="booking-form">
+        <h3 style="text-align: center; color: #0056a3; margin-bottom: 30px;">Formulário de Agendamento</h3>
+
+        <form id="bookingForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Categoria</label>
+                    <select id="category" name="category" required>
+                        <option value="">Selecione</option>
+                        <option value="student">Estudante IFPR</option>
+                        <option value="teacher">Professor IFPR</option>
+                        <option value="external">Comunidade Externa</option>
+                        <option value="research">Projeto de Pesquisa</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="service">Serviço Desejado</label>
+                <select id="service" name="service" required>
+                    <option value="">Selecione o serviço</option>
+                    <option value="cnc">Router CNC</option>
+                    <option value="3d">Impressão 3D</option>
+                    <option value="laser">Corte a Laser</option>
+                    <option value="eletronics">Eletrônica</option>
+                    <option value="robotics">Robótica</option>
+                    <option value="woodwork">Marcenaria</option>
+                    <option value="machining">Usinagem</option>
+                    <option value="welding">Solda</option>
+                    <option value="other">Outro</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date">Data Desejada</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Horário Desejado</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="project">Descrição do Projeto</label>
+                <textarea id="project" name="project"
+                    placeholder="Descreva brevemente seu projeto, objetivos e o que você pretende produzir no laboratório..." required></textarea>
+            </div>
+
+            <div style="text-align: center;">
+                <button type="submit" class="btn-primary">Enviar Solicitação</button>
+            </div>
+
+            <!-- Aqui vai aparecer a mensagem de sucesso -->
+            <div id="formMessage" style="margin-top: 20px; text-align:center;"></div>
+        </form>
+    </div>
+    </div>
     </section>
 
     <!-- EmailJS -->
