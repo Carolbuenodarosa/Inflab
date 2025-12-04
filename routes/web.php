@@ -85,21 +85,27 @@ Route::get('/bem-vindo', function () {
 //=====================================
 //   Forum
 //=====================================
+
 use App\Http\Controllers\ForumController;
 
-// Lista todos os tópicos
-Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
+Route::middleware('auth')->group(function () {
 
-// Visualiza um tópico específico e suas conversas
-Route::get('/forum/{id}', [ForumController::class, 'show'])->name('forum.show');
+    // Lista todos os tópicos
+    Route::get('/forum', [ForumController::class, 'index'])
+        ->name('forum.index');
 
-// Inserir uma nova conversa em um tópico
-Route::post('/forum/{id}/responder', [ForumController::class, 'responder'])->name('forum.responder');
+    // Visualiza um tópico específico e suas conversas
+    Route::get('/forum/{id}', [ForumController::class, 'show'])
+        ->name('forum.show');
 
-// Inserir uma nova conversa
-Route::post('/forum/{id}/responder', [ForumController::class, 'responder'])->name('forum.responder');
+    // Inserir uma nova conversa em um tópico
+    Route::post('/forum/{id}/responder', [ForumController::class, 'responder'])
+        ->name('forum.responder');
 
-// Criar novo tópico diretamente da index
-Route::post('/forum', [ForumController::class, 'store'])->name('forum.store');
+    // Criar novo tópico diretamente da index
+    Route::post('/forum', [ForumController::class, 'store'])
+        ->name('forum.store');
+});
+
 
 
