@@ -206,7 +206,7 @@
             <div class="input-group">
                 <label class="input-label" for="autor">Seu nome</label>
                 <input type="text" class="form-control" name="autor" id="autor"
-                    placeholder="Digite seu nome (opcional)">
+                    value="{{ auth()->user()->name ?? '' }}" placeholder="Digite seu nome (opcional)">
             </div>
 
             <div class="input-group">
