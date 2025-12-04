@@ -299,9 +299,7 @@
 </head>
 
 <body>
-    <a href="{{ route('forum.index') }}">
-        Fórum
-    </a>
+  
 
     <!-- Hero Section -->
     <section class="hero">
