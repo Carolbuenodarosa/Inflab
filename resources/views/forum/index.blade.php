@@ -208,7 +208,7 @@
                 <textarea name="descricao" id="descricao" rows="3" required></textarea>
 
                 <label for="autor">Seu nome:</label>
-                <input type="text" name="autor" id="autor" placeholder="Anônimo">
+                <input type="text" name="autor" id="autor" placeholder="Anônimo" value="{{ auth()->user()->name ?? '' }}" readonly>
 
                 <button type="submit">Criar Tópico</button>
             </form>
