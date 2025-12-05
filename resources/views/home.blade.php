@@ -299,9 +299,43 @@
 </head>
 
 <body>
-  
+
 
     <!-- Hero Section -->
+@if (session('success'))
+    <div id="alertMessage"
+        style="
+            background:#4CAF50;
+            color:white;
+            padding:15px 45px 15px 15px;
+            border-radius:5px;
+            margin:15px auto;
+            width:90%;
+            max-width:600px;
+            text-align:center;
+            font-size:18px;
+            position: relative;
+        ">
+        
+        <!-- Botão X -->
+        <span 
+            onclick="document.getElementById('alertMessage').style.display='none'" 
+            style="
+                position:absolute;
+                right:15px;
+                top:10px;
+                cursor:pointer;
+                font-weight:bold;
+                font-size:20px;
+            ">
+            &times;
+        </span>
+
+        {{ session('success') }}
+    </div>
+@endif
+
+
     <section class="hero">
         <div class="container">
             <h2>IFLAB - Laboratório de Fabricação, Robótica e Prototipagem</h2>
@@ -653,7 +687,8 @@
     <div class="booking-form">
         <h3 style="text-align: center; color: #0056a3; margin-bottom: 30px;">Formulário de Agendamento</h3>
 
-        <form id="bookingForm">
+        <form id="bookingForm" action="{{ route('agendamento.store') }}" method="POST">
+            @csrf
             <div class="form-row">
                 <div class="form-group">
                     <label for="name">Nome Completo</label>
@@ -718,47 +753,8 @@
             <div style="text-align: center;">
                 <button type="submit" class="btn-primary">Enviar Solicitação</button>
             </div>
-
-            <!-- Aqui vai aparecer a mensagem de sucesso -->
-            <div id="formMessage" style="margin-top: 20px; text-align:center;"></div>
         </form>
     </div>
-    </div>
-    </section>
-
-    <!-- EmailJS -->
-    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init("PUBLIC_KEY"); // substitua pelo seu Public Key
-        })();
-
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const formMessage = document.getElementById('formMessage');
-
-            emailjs.sendForm('SERVICE_ID', 'TEMPLATE_ID', this)
-                .then(function() {
-                    formMessage.innerHTML =
-                        '<div style="background:#4CAF50; color:white; padding:15px; border-radius:5px;">' +
-                        '<i class="fas fa-check-circle"></i> Solicitação enviada com sucesso! Entraremos em contato em breve.</div>';
-                    document.getElementById('bookingForm').reset();
-
-                    // Remove mensagem após 5 segundos
-                    setTimeout(() => {
-                        formMessage.innerHTML = '';
-                    }, 5000);
-
-                }, function(error) {
-                    formMessage.innerHTML =
-                        '<div style="background:#f44336; color:white; padding:15px; border-radius:5px;">' +
-                        '<i class="fas fa-times-circle"></i> Erro ao enviar. Tente novamente.</div>';
-                    console.error('EmailJS Error:', error);
-                });
-        });
-    </script>
-
     <style>
         .booking-form {
             background: #f5f5f5;
@@ -910,55 +906,6 @@
 
         // Inicializa
         updateCarousel();
-    </script>
-
-    <script defer>
-        // Form submission
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Get form values
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-
-            // Here you would normally send the data to a server
-            console.log('Form submitted:', data);
-
-            // Show success message
-            const formContainer = this.parentElement;
-            const successMessage = document.createElement('div');
-            successMessage.style.background = '#4CAF50';
-            successMessage.style.color = 'white';
-            successMessage.style.padding = '15px';
-            successMessage.style.borderRadius = '5px';
-            successMessage.style.marginTop = '20px';
-            successMessage.style.textAlign = 'center';
-            successMessage.innerHTML =
-                '<i class="fas fa-check-circle"></i> Solicitação enviada com sucesso! Entraremos em contato em breve.';
-
-            formContainer.appendChild(successMessage);
-            this.reset();
-
-            // Remove message after 5 seconds
-            setTimeout(() => {
-                successMessage.remove();
-            }, 5000);
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
     </script>
 
 

@@ -63,9 +63,12 @@ Route::get('/chat/messages', [ChatController::class, 'getMessages'])->name('chat
 // -----------------------------------------------------
 // 🔹 AGENDAMENTO
 // -----------------------------------------------------
-Route::post('/agendamento', [BookingController::class, 'store'])->name('booking.store');
+use App\Http\Controllers\AgendamentoController;
 
-
+Route::get('/agendamentos', [AgendamentoController::class, 'index'])->name('agendamentos.index');
+Route::middleware('auth')->group(function () {
+    Route::post('/agendamento/salvar', [AgendamentoController::class, 'store'])->name('agendamento.store');
+});
 // -----------------------------------------------------
 // 🔹 PÁGINAS SIMPLES
 // -----------------------------------------------------
@@ -106,6 +109,3 @@ Route::middleware('auth')->group(function () {
     Route::post('/forum', [ForumController::class, 'store'])
         ->name('forum.store');
 });
-
-
-

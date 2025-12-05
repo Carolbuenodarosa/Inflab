@@ -710,7 +710,14 @@
                     <li><a href="{{ route('home') }}#servicos">Serviços</a></li>
                     <li><a href="{{ route('home') }}#agendamento">Agendamento</a></li>
                     <li><a href="{{ route('home') }}#contato">Contato</a></li>
-
+                    @auth
+                        <!-- Verificação de usuário para adicionar evento -->
+                        @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com' ||
+                                strtolower(Auth::user()->email) === 'fernandes.junior@ifpr.edu.br' ||
+                                strtolower(Auth::user()->email) === 'jean.gentilini@ifpr.edu.br')
+                            <li><a href="{{ route('agendamentos.index') }}">lista de agendamentos</a></li>
+                        @endif
+                    @endauth
 
                     @guest
                         <a href="{{ route('login') }}" class="btn-blue">Login</a>
