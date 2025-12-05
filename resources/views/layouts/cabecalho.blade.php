@@ -654,6 +654,39 @@
         .chat-float:hover i {
             transform: scale(1.2);
         }
+
+        .menu-notificacao {
+            list-style: none;
+            position: relative;
+        }
+
+        .menu-notificacao a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            color: #004a8f;
+            text-decoration: none;
+            padding: 5px;
+        }
+
+        .menu-notificacao i {
+            font-size: 24px;
+        }
+
+        /* Badge da notificação */
+        .menu-notificacao .badge {
+            position: absolute;
+            top: -4px;
+            right: -6px;
+            background: #ff3b3b;
+            color: white;
+            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 50%;
+            font-weight: bold;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+        }
     </style>
 </head>
 
@@ -710,14 +743,7 @@
                     <li><a href="{{ route('home') }}#servicos">Serviços</a></li>
                     <li><a href="{{ route('home') }}#agendamento">Agendamento</a></li>
                     <li><a href="{{ route('home') }}#contato">Contato</a></li>
-                    @auth
-                        <!-- Verificação de usuário para adicionar evento -->
-                        @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com' ||
-                                strtolower(Auth::user()->email) === 'fernandes.junior@ifpr.edu.br' ||
-                                strtolower(Auth::user()->email) === 'jean.gentilini@ifpr.edu.br')
-                            <li><a href="{{ route('agendamentos.index') }}">lista de agendamentos</a></li>
-                        @endif
-                    @endauth
+
 
                     @guest
                         <a href="{{ route('login') }}" class="btn-blue">Login</a>
@@ -731,6 +757,26 @@
                                 <button type="submit">Log out</button>
                             </form>
                         </div>
+                        @auth
+                            @if (in_array(strtolower(Auth::user()->email), [
+                                    'carolbrm265@gmail.com',
+                                    'fernandes.junior@ifpr.edu.br',
+                                    'jean.gentilini@ifpr.edu.br',
+                                ]))
+                                @php
+                                    $countAg = \App\Models\Agendamento::count();
+                                @endphp
+
+                                <li class="menu-notificacao">
+                                    <a href="{{ route('agendamentos.index') }}">
+                                        <i class="fas fa-bell"></i>
+                                        @if ($countAg > 0)
+                                            <span class="badge">{{ $countAg }}</span>
+                                        @endif
+                                    </a>
+                                </li>
+                            @endif
+                        @endauth
 
                         <style>
                             .nav-logout {
