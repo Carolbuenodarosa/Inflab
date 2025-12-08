@@ -2,6 +2,11 @@
 
 <div class="page-wrapper">
 
+    <!-- ===== BOTÃO VOLTAR ===== -->
+    <div class="linha-voltar">
+        <a href="/#agendamentos" class="btn btn-voltar"> ← Voltar para home</a>
+    </div>
+
     <h2 class="titulo-pagina">Agendamentos em Aguardo</h2>
 
     @if ($agendamentos->isEmpty())
@@ -29,11 +34,9 @@
             @endforeach
 
         </div>
-
     @endif
 
 </div>
-
 
 <style>
     /* --- Layout Geral --- */
@@ -44,6 +47,30 @@
         font-family: 'Segoe UI', Tahoma, sans-serif;
     }
 
+    /* ===== BOTÃO VOLTAR ===== */
+    .linha-voltar {
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 22px;
+        font-size: 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #285991;
+        transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #0052b3;
+        transform: translateY(-2px);
+    }
+
+    /* --- Título da Página --- */
     .titulo-pagina {
         color: #004a8f;
         font-size: 28px;
@@ -111,6 +138,11 @@
 
         .agendamento-info p {
             font-size: 15px;
+        }
+
+        .btn {
+            width: 100%;
+            text-align: center;
         }
     }
 </style>

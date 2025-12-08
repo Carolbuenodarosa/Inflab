@@ -52,7 +52,8 @@
             height: 16px;
             display: inline-block;
             flex-shrink: 0;
-            color: white; /* usa currentColor no SVG */
+            color: white;
+            /* usa currentColor no SVG */
         }
 
         /* ===== TÍTULO PRINCIPAL ===== */
@@ -178,18 +179,6 @@
 
     {{-- Inclua seu cabeçalho layout aqui (se necessário) --}}
     @include('layouts.cabecalho')
-
-    <!-- BOTÃO VOLTAR SUPERIOR (SVG inline, sempre funciona) -->
-    <div class="top-voltar">
-        <a href="{{ route('home') }}#servicos" class="btn-left" aria-label="Voltar ao início">
-            <!-- SVG de seta para a esquerda, usa currentColor -->
-            <svg class="icon-left" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-            Voltar
-        </a>
-    </div>
-
     <h1 class="page-title">ELETRÔNICA</h1>
 
     <p class="page-subtitle">
@@ -254,7 +243,8 @@
     <div class="bottom-voltar-container">
         <a href="{{ route('home') }}#servicos" class="bottom-btn" aria-label="Voltar ao início">
             <svg class="icon-left" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
             </svg>
             Voltar ao Início
         </a>

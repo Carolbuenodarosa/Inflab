@@ -209,7 +209,7 @@
             @endif
 
             <div class="top-buttons">
-                <a href="{{ route('home') }}#servicos" class="bottom-btn">← Voltar</a>
+                <a href="{{ route('home') }}" class="bottom-btn">← Voltar</a>
 
                 @if ($isAdmin)
                     <button type="submit" class="bottom-btn delete-btn">
@@ -297,6 +297,44 @@
             window.location.href = div.dataset.url;
         });
     });
+</script>
+<style>
+    .mensagem-sucesso {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #1fa85b;
+        color: white;
+        padding: 20px 28px;
+        border-radius: 12px;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .mensagem-sucesso button {
+        background: #fff;
+        color: #1fa85b;
+        border: none;
+        padding: 6px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .mensagem-sucesso button:hover {
+        background: #e0e0e0;
+    }
+</style>
+
+<script>
+    function fecharMensagem() {
+        document.getElementById('mensagem-sucesso').style.display = 'none';
+    }
 </script>
 
 @include('layouts.footer')

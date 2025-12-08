@@ -27,7 +27,8 @@
         body {
             color: var(--ifpr-text);
             overflow-x: hidden;
-            /* 🔥 impede scroll lateral */
+            background: #1c54811e
+                /* 🔥 impede scroll lateral */
         }
 
         .service-card {
@@ -302,39 +303,94 @@
 
 
     <!-- Hero Section -->
-@if (session('success'))
-    <div id="alertMessage"
-        style="
-            background:#4CAF50;
-            color:white;
-            padding:15px 45px 15px 15px;
-            border-radius:5px;
-            margin:15px auto;
-            width:90%;
-            max-width:600px;
-            text-align:center;
-            font-size:18px;
-            position: relative;
-        ">
-        
-        <!-- Botão X -->
-        <span 
-            onclick="document.getElementById('alertMessage').style.display='none'" 
-            style="
-                position:absolute;
-                right:15px;
-                top:10px;
-                cursor:pointer;
-                font-weight:bold;
-                font-size:20px;
-            ">
-            &times;
-        </span>
+    @if (session('success'))
+        <div id="mensagem-sucesso" class="mensagem-sucesso">
+            <span>{{ session('success') }}</span>
+            <button onclick="fecharMensagem()" class="fechar">&times;</button>
+        </div>
+    @endif
 
-        {{ session('success') }}
-    </div>
-@endif
+    <style>
+        .about {
+            background-color: #3baaff2e;
+        }
 
+        .mensagem-sucesso {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007BFF;
+            /* azul */
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 300px;
+            max-width: 500px;
+            font-size: 16px;
+            animation: slideDown 0.4s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .mensagem-sucesso.ocultar {
+            opacity: 0;
+            transform: translate(-50%, -20px);
+        }
+
+        .mensagem-sucesso .fechar {
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            line-height: 1;
+            padding: 0;
+            margin-left: 20px;
+            transition: 0.2s;
+        }
+
+        .mensagem-sucesso .fechar:hover {
+            color: #d4d4d4;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+    </style>
+
+    <script>
+        function fecharMensagem() {
+            const mensagem = document.getElementById('mensagem-sucesso');
+            mensagem.classList.add('ocultar');
+            setTimeout(() => {
+                mensagem.remove();
+            }, 500); // remove do DOM após a transição
+        }
+
+        // Fecha automaticamente após 4 segundos
+        window.addEventListener('DOMContentLoaded', () => {
+            const mensagem = document.getElementById('mensagem-sucesso');
+            if (mensagem) {
+                setTimeout(() => {
+                    fecharMensagem();
+                }, 3000); // 3000ms = 4s
+            }
+        });
+    </script>
 
     <section class="hero">
         <div class="container">
@@ -393,7 +449,7 @@
                 <p>Conheça nossos equipamentos e áreas de atuação</p>
 
             </div>
-            <<div class="services-grid">
+            <div class="services-grid">
 
                 <a href="{{ url('maquinas') }}" class="service-card">
                     <div class="service-icon">
@@ -485,7 +541,7 @@
                     </div>
                 </a>
 
-        </div>
+            </div>
 
     </section>
     <!--Eventos-->
@@ -761,7 +817,7 @@
             padding: 40px;
             border-radius: 10px;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 45px auto;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 

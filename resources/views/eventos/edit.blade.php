@@ -130,7 +130,7 @@
     <div class="evento-form-page">
         <h2>Editar Evento</h2>
         <div class="back-btn">
-            <a href="{{ route('home') }}">
+            <a href="{{ route('home') }}#eventos">
                 <button type="button">← Voltar para Home</button>
             </a>
         </div>
@@ -158,17 +158,6 @@
 
             <label for="titulo">Título:</label>
             <input type="text" name="titulo" id="titulo" value="{{ old('titulo', $evento->titulo) }}" required>
-
-            <label for="categoria">Categoria:</label>
-            <select name="categoria" id="categoria" required>
-                <option value="">Selecione uma categoria</option>
-                <option value="geral" {{ $evento->categoria == 'geral' ? 'selected' : '' }}>Geral</option>
-                <option value="cultural" {{ $evento->categoria == 'cultural' ? 'selected' : '' }}>Cultural</option>
-                <option value="esportivo" {{ $evento->categoria == 'esportivo' ? 'selected' : '' }}>Esportivo</option>
-                <option value="educacional" {{ $evento->categoria == 'educacional' ? 'selected' : '' }}>Educacional
-                </option>
-                <option value="outros" {{ $evento->categoria == 'outros' ? 'selected' : '' }}>Outros</option>
-            </select>
 
             <label for="descricao">Descrição:</label>
             <textarea name="descricao" id="descricao" rows="3">{{ old('descricao', $evento->descricao) }}</textarea>

@@ -145,21 +145,11 @@
                 {{ session('success') }}
             </div>
         @endif
-
         <form action="{{ route('eventos.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <label for="titulo">Título:</label>
             <input type="text" name="titulo" id="titulo" required>
-
-            <label for="categoria">Categoria:</label>
-            <select name="categoria" id="categoria" required>
-                <option value="">Selecione uma categoria</option>
-                <option value="visita">Visitas</option>
-                <option value="workshops">Workshops</option>
-                <option value="Treinamentos">Treinamentos</option>
-                <option value="Exposições">Exposições</option>
-            </select>
 
             <label for="descricao">Descrição:</label>
             <textarea name="descricao" id="descricao" rows="3"></textarea>

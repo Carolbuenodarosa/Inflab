@@ -201,8 +201,8 @@
 <body>
 
     <h1 class="page-title">Robótica</h1>
-    <p class="page-subtitle"> a> Infraestrutura tecnológica do IFPR Palmas para inovação, prototipagem e pesquisa
-        aplicada
+    <p class="page-subtitle">Infraestrutura tecnológica do IFPR Palmas para inovação, prototipagem e pesquisa
+        aplicada.
     </p>
 
     <div class="machines-container">
