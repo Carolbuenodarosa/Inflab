@@ -124,7 +124,7 @@
         <h2>Cadastrar Evento</h2>
 
         <div class="back-btn">
-            <a href="{{ route('home') }}">
+            <a href="{{ route('home') }}#eventos">
                 <button type="button">← Voltar para Home</button>
             </a>
         </div>
