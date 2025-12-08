@@ -148,6 +148,18 @@ class EventoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Buscar o evento
+        $evento = Evento::findOrFail($id);
+
+        // Excluir a imagem, se existir
+        if ($evento->imagem && Storage::disk('public')->exists($evento->imagem)) {
+            Storage::disk('public')->delete($evento->imagem);
+        }
+
+        // Excluir o registro
+        $evento->delete();
+
+        // Redirecionar com mensagem
+        return redirect()->route('home')->with('success', 'Evento excluído com sucesso!');
     }
 }

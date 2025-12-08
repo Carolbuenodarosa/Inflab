@@ -28,7 +28,7 @@
                     <li><a href="/#eventos">Eventos</a></li>
                     <li><a href="/#agendamento">Agendamento</a></li>
                     <li><a href="/#contato">Contato</a></li>
-                    <li><a href="/regulamento.pdf" target="_blank">Regulamento de Uso</a></li>
+
                 </ul>
             </div>
 

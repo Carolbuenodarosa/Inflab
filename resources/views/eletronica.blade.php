@@ -1,15 +1,14 @@
+{{-- coloque isto no seu arquivo Blade (ex: resources/views/maquinas.blade.php) --}}
 <!doctype html>
 <html lang="pt-BR">
 
 <head>
-    @include('layouts.cabecalho')
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Máquinas e Recursos | IFLAB - IFPR Palmas</title>
 
-    <!-- FONTES E ÍCONES -->
+    <!-- FONTES (apenas fontes, sem dependência de ícones externos) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body {
@@ -18,12 +17,50 @@
             margin: 0;
         }
 
+        /* ===== BOTÃO VOLTAR SUPERIOR ===== */
+        .top-voltar {
+            width: 100%;
+            max-width: 1200px;
+            margin: 15px auto 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .btn-left {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #0a6cc4;
+            color: white;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        .btn-left:hover {
+            background: #084f91;
+            transform: translateX(-3px);
+        }
+
+        /* SVG ícone */
+        .icon-left {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            flex-shrink: 0;
+            color: white; /* usa currentColor no SVG */
+        }
+
         /* ===== TÍTULO PRINCIPAL ===== */
         h1.page-title {
             text-align: center;
             font-weight: 800;
             color: #0a6cc4;
-            margin-top: 25px;
+            margin-top: 12px;
             margin-bottom: 5px;
             font-size: 42px;
             letter-spacing: -1px;
@@ -69,11 +106,6 @@
             object-fit: cover;
         }
 
-        .box-content {
-            width: 100%;
-            background: #ffffff;
-        }
-
         .box-title {
             background: #0a6cc4;
             color: white;
@@ -81,6 +113,7 @@
             font-size: 20px;
             font-weight: 700;
             text-align: center;
+            width: 100%;
         }
 
         .box-text {
@@ -88,6 +121,33 @@
             font-size: 15px;
             color: #333;
             line-height: 1.5;
+            width: 100%;
+        }
+
+        /* ===== BOTÃO VOLTAR INFERIOR ===== */
+        .bottom-voltar-container {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .bottom-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            background: #0a6cc4;
+            color: white;
+            font-weight: 700;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 17px;
+            transition: 0.3s;
+        }
+
+        .bottom-btn:hover {
+            background: #084f91;
+            transform: translateY(-3px);
         }
 
         /* ===== RESPONSIVIDADE ===== */
@@ -101,92 +161,103 @@
             .grid-container {
                 grid-template-columns: 1fr;
             }
+
+            .btn-left {
+                padding: 6px 14px;
+                font-size: 14px;
+            }
+
+            .bottom-btn {
+                width: 80%;
+            }
         }
     </style>
 </head>
 
 <body>
 
+    {{-- Inclua seu cabeçalho layout aqui (se necessário) --}}
+    @include('layouts.cabecalho')
+
+    <!-- BOTÃO VOLTAR SUPERIOR (SVG inline, sempre funciona) -->
+    <div class="top-voltar">
+        <a href="{{ route('home') }}#servicos" class="btn-left" aria-label="Voltar ao início">
+            <!-- SVG de seta para a esquerda, usa currentColor -->
+            <svg class="icon-left" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            Voltar
+        </a>
+    </div>
+
     <h1 class="page-title">ELETRÔNICA</h1>
-    <p class="page-subtitle">Infraestrutura tecnológica do IFPR Palmas para inovação, prototipagem e pesquisa aplicada
+
+    <p class="page-subtitle">
+        Infraestrutura tecnológica do IFPR Palmas para inovação, prototipagem e pesquisa aplicada
     </p>
 
     <div class="grid-container">
 
         <!-- OSCILOSCÓPIO -->
         <div class="machine-box">
-            <img src="https://blog.instrusul.com.br/wp-content/uploads/2018/11/oscilosc%C3%B3pio.jpg">
-            <div class="box-content">
-                <div class="box-title">Osciloscópio</div>
-                <div class="box-text">
-                    Um osciloscópio é um instrumento de medição usado para visualizar e analisar sinais elétricos em
-                    forma de ondas. Ele mostra, em uma tela, como a tensão varia ao longo do tempo, permitindo
-                    identificar frequência, amplitude, ruídos e outras características do sinal. É essencial em
-                    eletrônica, manutenção, testes e desenvolvimento de circuitos.
-                </div>
+            <img src="https://blog.instrusul.com.br/wp-content/uploads/2018/11/oscilosc%C3%B3pio.jpg"
+                alt="Osciloscópio">
+            <div class="box-title">Osciloscópio</div>
+            <div class="box-text">
+                Um osciloscópio é um instrumento de medição usado para visualizar sinais elétricos
             </div>
         </div>
 
-        <!-- GERADOR DE FUNÇÕES -->
+        <!-- GERADOR -->
         <div class="machine-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/NoN_DF1641A_Function_Generator.jpg">
-            <div class="box-content">
-                <div class="box-title">Gerador de Funções</div>
-                <div class="box-text">
-                    Um gerador de funções é um instrumento eletrônico que produz sinais periódicos, como ondas
-                    senoidais, quadradas e triangulares, com frequência e amplitude ajustáveis. É utilizado para testar,
-                    calibrar e analisar circuitos eletrônicos, permitindo simular diferentes condições de funcionamento.
-                    É essencial em laboratórios, manutenção e desenvolvimento de equipamentos eletrônicos.
-                </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/NoN_DF1641A_Function_Generator.jpg"
+                alt="Gerador">
+            <div class="box-title">Gerador de Funções</div>
+            <div class="box-text">
+                Um gerador de funções é um instrumento que produz sinais periódicos
             </div>
         </div>
 
-        <!-- FONTE DE ALIMENTAÇÃO -->
+        <!-- FONTE -->
         <div class="machine-box">
-            <img
-                src="https://lojagoldentec.vteximg.com.br/arquivos/ids/158174-600-600/29726-01.jpg?v=637684580111170000">
-            <div class="box-content">
-                <div class="box-title">Fonte de Alimentação</div>
-                <div class="box-text">
-                    Uma fonte de alimentação é um equipamento utilizado para fornecer energia elétrica estável e
-                    controlada a circuitos e dispositivos eletrônicos. Ela converte a tensão da rede para níveis
-                    ajustáveis de tensão e corrente, garantindo segurança e funcionamento adequado dos componentes. É
-                    fundamental em laboratórios, testes, manutenção e desenvolvimento de sistemas eletrônicos.
-                </div>
+            <img src="https://lojagoldentec.vteximg.com.br/arquivos/ids/158174-600-600/29726-01.jpg?v=637684580111170000"
+                alt="Fonte">
+            <div class="box-title">Fonte de Alimentação</div>
+            <div class="box-text">
+                Uma fonte de alimentação fornece energia estável e controlada
             </div>
         </div>
 
-        <!-- ESTAÇÃO DE SOLDA -->
+        <!-- ESTAÇÃO -->
         <div class="machine-box">
-            <img
-                src="https://www.usinainfo.com.br/1013779/estacao-de-solda-e-retrabalho-yaxun-702b-902-2-em-1-de-uso-industrial-127v.jpg">
-            <div class="box-content">
-                <div class="box-title">Estação de Solda</div>
-                <div class="box-text">
-                    Uma estação de solda é um equipamento utilizado para realizar soldagem e dessoldagem de componentes
-                    eletrônicos com precisão. Ela geralmente inclui um ferro de solda com controle de temperatura,
-                    permitindo ajustes finos para diferentes tipos de solda e componentes sensíveis. É essencial em
-                    manutenção, montagem e reparo de placas e dispositivos eletrônicos.
-                </div>
+            <img src="https://www.usinainfo.com.br/1013779/estacao-de-solda-e-retrabalho-yaxun-702b-902-2-em-1-de-uso-industrial-127v.jpg"
+                alt="Estação">
+            <div class="box-title">Estação de Solda</div>
+            <div class="box-text">
+                Uma estação usada para soldagem de componentes eletrônicos com precisão
             </div>
         </div>
 
-        <!-- CÂMERA TERMOGRÁFICA -->
+        <!-- CÂMERA -->
         <div class="machine-box">
-            <img
-                src="https://images.tcdn.com.br/img/img_prod/671371/camera_termografica_19_200_pixels_com_nuvem_ignite_flir_e5_pro_3931_1_5825dabde888f0ab21c3d69f467fc1d5.jpeg">
-            <div class="box-content">
-                <div class="box-title">Câmera Termográfica</div>
-                <div class="box-text">
-                    Uma câmera termográfica é um equipamento capaz de detectar e visualizar a distribuição de
-                    temperatura em objetos e ambientes por meio de imagens infravermelhas. Ela transforma o calor
-                    emitido pelos materiais em mapas de cores, permitindo identificar pontos quentes, falhas elétricas,
-                    vazamentos e problemas de isolamento. É amplamente usada em manutenção preventiva, inspeções
-                    industriais e segurança.
-                </div>
+            <img src="https://images.tcdn.com.br/img/img_prod/671371/camera_termografica_19_200_pixels_com_nuvem_ignite_flir_e5_pro_3931_1_5825dabde888f0ab21c3d69f467fc1d5.jpeg"
+                alt="Câmera">
+            <div class="box-title">Câmera Termográfica</div>
+            <div class="box-text">
+                Detecta distribuição de temperatura por imagens infravermelhas
             </div>
         </div>
 
+    </div>
+
+    <!-- BOTÃO VOLTAR INFERIOR (também com SVG) -->
+    <div class="bottom-voltar-container">
+        <a href="{{ route('home') }}#servicos" class="bottom-btn" aria-label="Voltar ao início">
+            <svg class="icon-left" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            Voltar ao Início
+        </a>
     </div>
 
     @include('layouts.footer')

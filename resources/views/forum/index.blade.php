@@ -8,7 +8,7 @@
     }
 
     .forum-container {
-        max-width: 1100px;
+        max-width: 1250px;
         margin: 55px auto;
         padding: 0 20px;
         animation: fadeIn .35s ease-out;
@@ -47,7 +47,7 @@
         opacity: .8;
     }
 
-    /* ===== Subtítulo "Tópicos em Aberto" ===== */
+    /* ===== Subtítulo ===== */
     .forum-subtitulo {
         font-size: 1.6em;
         font-weight: 800;
@@ -56,9 +56,7 @@
         padding-left: 2px;
     }
 
-    /* ============================
-       GRID EM 2 COLUNAS
-       ============================ */
+    /* ===== GRID EM 2 COLUNAS ===== */
     .forum-grid {
         display: grid;
         grid-template-columns: 1fr 350px;
@@ -71,9 +69,7 @@
         }
     }
 
-    /* ==========================================================
-       FORMULÁRIO (COLUNA DIREITA)
-       ========================================================== */
+    /* ===== FORMULÁRIO ===== */
     .forum-form {
         background: #ffffff;
         border-radius: 10px;
@@ -90,22 +86,14 @@
         text-align: center;
     }
 
-    .forum-form label {
-        font-size: 0.9em;
-        margin-bottom: 4px;
-        display: block;
-    }
-
-    .forum-form input[type="text"],
+    .forum-form input,
     .forum-form textarea {
         width: 100%;
         border: 1px solid #cbd5e1;
         border-radius: 8px;
         padding: 10px;
-        font-size: 0.9em;
         background: #f8fafc;
         margin-bottom: 10px;
-        transition: .25s;
     }
 
     .forum-form button {
@@ -118,17 +106,9 @@
         color: white;
         border: none;
         cursor: pointer;
-        transition: .25s;
     }
 
-    .forum-form button:hover {
-        background: linear-gradient(90deg, #1e40af, #2563eb);
-    }
-
-    /* ==========================================================
-       TÓPICOS (COLUNA ESQUERDA)
-       ========================================================== */
-
+    /* ===== TÓPICOS ===== */
     .forum-topic {
         background: #ffffff;
         border-radius: 12px;
@@ -138,7 +118,6 @@
         margin-bottom: 18px;
         transition: .18s ease;
         cursor: pointer;
-        /* ← TÓPICO CLICÁVEL */
     }
 
     .forum-topic:hover {
@@ -147,22 +126,45 @@
         box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.07);
     }
 
-    /* Link ocupando toda a div */
     .forum-topic a {
         color: #1e40af;
-        font-size: 1.28em;
+        font-size: 1.25em;
         font-weight: 800;
         text-decoration: none;
-        display: block;
-        /* ← Link cobre toda a área */
-        width: 100%;
-        height: 100%;
     }
 
-    .forum-topic p {
-        color: #475569;
-        font-size: 0.9em;
-        margin-top: 8px;
+    /* ===== BOTÕES ===== */
+    .top-buttons {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .bottom-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 22px;
+        background: #0a6cc4;
+        color: white;
+        font-weight: 700;
+        border-radius: 10px;
+        text-decoration: none;
+        cursor: pointer;
+        border: none !important;
+        outline: none !important;
+    }
+
+    .bottom-btn.delete-btn {
+        background: #ef4444 !important;
+    }
+
+    .bottom-btn.delete-btn:hover {
+        background-color: #8c2828 !important;
+        color: #fff !important;
+        transition: 0.3s;
     }
 </style>
 
@@ -170,48 +172,119 @@
 
     <h1>Fórum</h1>
 
-    <!-- GRID EM DUAS COLUNAS -->
+    {{-- MENSAGENS --}}
+    @if (session('error'))
+        <div style="color:#b91c1c; font-weight:bold; text-align:center; margin-bottom:15px;">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div style="color:#166534; font-weight:bold; text-align:center; margin-bottom:15px;">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @php
+        $admins = ['carolbrm265@gmail.com', 'fernandes.junior@ifpr.edu.br', 'jean.gentilini@ifpr.edu.br'];
+        $user = auth()->user();
+        $isAdmin = $user && in_array(strtolower($user->email), $admins);
+    @endphp
+
     <div class="forum-grid">
 
-        <!-- LISTA DE TÓPICOS (COLUNA ESQUERDA) -->
+        {{-- LISTA DE TÓPICOS --}}
         <div>
             <h2 class="forum-subtitulo">Tópicos em Aberto</h2>
 
             @if ($topicos->isEmpty())
                 <p style="text-align:center; color:#64748b;">Nenhum tópico disponível.</p>
-            @else
-                @foreach ($topicos as $topico)
-                    <div class="forum-topic" data-url="{{ route('forum.show', $topico->id) }}">
+            @endif
+
+            {{-- FORM DE DELETAR (SÓ ADMIN) --}}
+            @if ($isAdmin)
+                <form action="{{ route('forum.destroyMultiple') }}" method="POST" id="delete-topicos-form">
+                    @csrf
+                    @method('DELETE')
+            @endif
+
+            <div class="top-buttons">
+                <a href="{{ route('home') }}#servicos" class="bottom-btn">← Voltar</a>
+
+                @if ($isAdmin)
+                    <button type="submit" class="bottom-btn delete-btn">
+                        Excluir Selecionados
+                    </button>
+                @endif
+            </div>
+
+            {{-- LISTAGEM --}}
+            @foreach ($topicos as $topico)
+                <div class="forum-topic" data-url="{{ route('forum.show', $topico->id) }}">
+                    <div style="display:flex; align-items:center; gap:10px;">
+
+                        @if ($isAdmin)
+                            <input type="checkbox" name="topicos[]" value="{{ $topico->id }}"
+                                onclick="event.stopPropagation();">
+                        @endif
+
                         <a href="{{ route('forum.show', $topico->id) }}">
                             {{ $topico->titulo }}
                         </a>
-                        <p>
-                            Criado por <strong>{{ $topico->autor }}</strong>
-                            em {{ $topico->created_at->format('d/m/Y') }}
-                        </p>
                     </div>
-                @endforeach
+
+                    <p>
+                        Criado por <strong>{{ $topico->autor }}</strong>
+                        em {{ $topico->created_at->format('d/m/Y') }}
+                    </p>
+                </div>
+            @endforeach
+
+            @if ($isAdmin)
+                </form>
             @endif
         </div>
 
-        <!-- FORMULÁRIO (COLUNA DIREITA) -->
+        {{-- FORMULÁRIO DE CRIAR TÓPICO --}}
         <div class="forum-form">
             <h3>Criar Novo Tópico</h3>
 
-            <form action="{{ route('forum.store') }}" method="POST">
-                @csrf
+            @php
+                $jaCriou = false;
 
-                <label for="titulo">Título:</label>
-                <input type="text" name="titulo" id="titulo" required>
+                if ($user && !$isAdmin) {
+                    $jaCriou = \App\Models\Topico::where('autor', $user->name)
+                        ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+                        ->exists();
+                }
+            @endphp
 
-                <label for="descricao">Descrição:</label>
-                <textarea name="descricao" id="descricao" rows="3" required></textarea>
+            {{-- ADMIN → pode criar sempre --}}
+            @if ($isAdmin)
+                <form action="{{ route('forum.store') }}" method="POST">
+                    @csrf
+                    <input type="text" name="titulo" placeholder="Título do tópico" required>
+                    <textarea name="descricao" rows="3" placeholder="Descrição..." required></textarea>
+                    <input type="text" value="{{ $user->name }}" readonly>
+                    <button type="submit">Criar Tópico</button>
+                </form>
 
-                <label for="autor">Seu nome:</label>
-                <input type="text" name="autor" id="autor" placeholder="Anônimo" value="{{ auth()->user()->name ?? '' }}" readonly>
+                {{-- USUÁRIO NORMAL → já criou --}}
+            @elseif($jaCriou)
+                <p style="color:#b91c1c; font-weight:bold; text-align:center;">
+                    Você já criou 1 tópico esta semana.
+                </p>
 
-                <button type="submit">Criar Tópico</button>
-            </form>
+                {{-- USUÁRIO NORMAL → pode criar --}}
+            @else
+                <form action="{{ route('forum.store') }}" method="POST">
+                    @csrf
+                    <input type="text" name="titulo" placeholder="Título do tópico" required>
+                    <textarea name="descricao" rows="3" placeholder="Descrição..." required></textarea>
+                    <input type="text" value="{{ $user->name }}" readonly>
+                    <button type="submit">Criar Tópico</button>
+                </form>
+            @endif
         </div>
 
     </div>
@@ -219,11 +292,9 @@
 </div>
 
 <script>
-    /* Torna toda a div clicável */
     document.querySelectorAll('.forum-topic').forEach(div => {
         div.addEventListener('click', () => {
-            const url = div.getAttribute('data-url');
-            window.location.href = url;
+            window.location.href = div.dataset.url;
         });
     });
 </script>

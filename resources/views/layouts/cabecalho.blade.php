@@ -742,6 +742,7 @@
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('home') }}#servicos">Serviços</a></li>
                     <li><a href="{{ route('home') }}#agendamento">Agendamento</a></li>
+                    <li><a href="/#eventos">Eventos</a></li>
                     <li><a href="{{ route('home') }}#contato">Contato</a></li>
 
 

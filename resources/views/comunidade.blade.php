@@ -175,13 +175,99 @@
                width: 40px;
            }
        }
+
+       .top-bar {
+           max-width: 1200px;
+           margin: 0 auto;
+           padding: 0 15px;
+           display: flex;
+           align-items: center;
+           gap: 15px;
+           margin-top: 20px;
+       }
+
+       .btn-left {
+           display: inline-flex;
+           align-items: center;
+           gap: 8px;
+           padding: 8px 16px;
+           background: #0a6cc4;
+           color: white;
+           font-weight: 600;
+           border-radius: 10px;
+           text-decoration: none;
+           transition: 0.3s;
+           font-size: 15px;
+       }
+
+       .btn-left:hover {
+           background: #084f91;
+           transform: translateX(-3px);
+       }
+
+       .top-title {
+           font-size: 42px;
+           font-weight: 800;
+           color: #0a6cc4;
+           letter-spacing: -1px;
+           margin: 0;
+       }
+
+       .bottom-voltar-container {
+           width: 100%;
+           text-align: center;
+           margin-bottom: 40px;
+       }
+
+       .bottom-btn {
+           display: inline-flex;
+           align-items: center;
+           gap: 10px;
+           padding: 12px 28px;
+           background: #0a6cc4;
+           color: white;
+           font-weight: 700;
+           border-radius: 12px;
+           text-decoration: none;
+           font-size: 17px;
+           transition: 0.3s;
+       }
+
+       .bottom-btn:hover {
+           background: #084f91;
+           transform: translateY(-3px);
+       }
+
+       /* ===== RESPONSIVIDADE ===== */
+       @media (max-width: 1024px) {
+           .grid-container {
+               grid-template-columns: repeat(2, 1fr);
+           }
+       }
+
+       @media (max-width: 650px) {
+           .grid-container {
+               grid-template-columns: 1fr;
+           }
+
+           .btn-left {
+               padding: 6px 14px;
+               font-size: 14px;
+           }
+
+           .bottom-btn {
+               width: 80%;
+           }
+       }
    </style>
    <div class="container">
        <div class="comunidade-header">
            <h1>Atendimento à Comunidade</h1>
            <p>Suporte especializado para projetos acadêmicos, sociais e profissionais.</p>
        </div>
-
+       <p class="page-subtitle"> Voltar
+           </a> Infraestrutura tecnológica do IFPR Palmas para inovação, prototipagem e pesquisa aplicada
+       </p>
        <div class="content-section">
            <h2>Projetos Acadêmicos</h2>
            <p>Oferecemos suporte completo para estudantes e instituições educacionais.</p>
@@ -219,6 +305,11 @@
                <li>Apoio para eventos educacionais</li>
                <li>Incentivo à inclusão tecnológica</li>
            </ul>
+       </div>
+       <div class="bottom-voltar-container">
+           <a href="{{ route('home') }}#servicos" class="bottom-btn">
+               <i class="fa-solid fa-arrow-left"></i> Voltar ao Início
+           </a>
        </div>
 
    </div>

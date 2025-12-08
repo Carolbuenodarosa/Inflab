@@ -11,7 +11,7 @@ class ForumController extends Controller
     // Lista todos os tópicos
     public function index()
     {
-        $topicos = Topico::all(); // ou paginate(10) se quiser paginação
+        $topicos = Topico::orderBy('created_at', 'desc')->get();
         return view('forum.index', compact('topicos'));
     }
 
@@ -19,44 +19,76 @@ class ForumController extends Controller
     public function show($id)
     {
         $topico = Topico::findOrFail($id);
-        $conversas = $topico->conversas()->orderBy('created_at', 'asc')->get(); // conversas do tópico
+        $conversas = $topico->conversas()->orderBy('created_at', 'asc')->get();
         return view('forum.show', compact('topico', 'conversas'));
     }
 
-    // Inserir nova conversa em um tópico
+    // Criar novo tópico
+    public function store(Request $request)
+    {
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descricao' => 'required|string',
+        ]);
+
+        $user = auth()->user();
+        $admins = [
+            'carolbrm265@gmail.com',
+            'fernandes.junior@ifpr.edu.br',
+            'jean.gentilini@ifpr.edu.br'
+        ];
+
+        $isAdmin = in_array(strtolower($user->email), $admins);
+
+        // Limite: 1 por semana para usuários comuns
+        if (!$isAdmin) {
+
+            $jaCriouEstaSemana = Topico::where("autor", $user->name)
+                ->whereBetween("created_at", [
+                    now()->startOfWeek(),
+                    now()->endOfWeek()
+                ])
+                ->exists();
+
+            if ($jaCriouEstaSemana) {
+                return back()->with("error", "Você só pode criar 1 tópico por semana.");
+            }
+        }
+
+        Topico::create([
+            "titulo" => $request->titulo,
+            "descricao" => $request->descricao,
+            "autor" => $user->name
+        ]);
+
+        return redirect()->route("forum.index")->with("success", "Tópico criado com sucesso!");
+    }
+
+    // Responder dentro do tópico
     public function responder(Request $request, $id)
     {
         $request->validate([
-            'conteudo' => 'required'
+            'conteudo' => 'required|string'
         ]);
 
-        $topico = Topico::findOrFail($id);
-
-        $conversa = new Conversa();
-        $conversa->topico_id = $topico->id;
-        $conversa->autor = $request->autor ?? 'Anônimo';
-        $conversa->conteudo = $request->conteudo;
-        $conversa->save();
+        Conversa::create([
+            'topico_id' => $id,
+            'autor' => auth()->user()->name,
+            'conteudo' => $request->conteudo,
+        ]);
 
         return redirect()->route('forum.show', $id);
     }
 
-    // Criar um novo tópico diretamente na index
-    public function store(Request $request)
+    // Deletar vários tópicos
+    public function destroyMultiple(Request $request)
     {
         $request->validate([
-            'titulo' => 'required',
-            'descricao' => 'required',
-            'autor' => 'nullable'
+            'topicos' => 'required|array'
         ]);
 
-        $topico = new Topico();
-        $topico->titulo = $request->titulo;
-        $topico->descricao = $request->descricao;
-        $topico->autor = $request->autor ?? 'Anônimo';
-        $topico->save();
+        Topico::whereIn('id', $request->topicos)->delete();
 
-        return redirect()->route('forum.index');
+        return redirect()->route('forum.index')->with('success', 'Tópicos excluídos com sucesso!');
     }
-    
 }

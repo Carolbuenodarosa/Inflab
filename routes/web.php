@@ -108,4 +108,5 @@ Route::middleware('auth')->group(function () {
     // Criar novo tópico diretamente da index
     Route::post('/forum', [ForumController::class, 'store'])
         ->name('forum.store');
+    Route::delete('/forum/destroy-multiple', [ForumController::class, 'destroyMultiple'])->name('forum.destroyMultiple');
 });
