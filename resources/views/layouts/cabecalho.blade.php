@@ -665,7 +665,7 @@
             display: flex;
             align-items: center;
             font-size: 22px;
-            color: #004a8f;
+            color: #ffffff;
             text-decoration: none;
             padding: 5px;
         }
