@@ -27,8 +27,8 @@
         body {
             color: var(--ifpr-text);
             overflow-x: hidden;
-            background: #1c54811e
-                /* 🔥 impede scroll lateral */
+            background: #9bc6ff;
+            /* 🔥 impede scroll lateral */
         }
 
         .service-card {
@@ -43,7 +43,7 @@
             position: relative;
             width: 100%;
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 1px auto;
             padding: 0 25px;
         }
 
@@ -312,7 +312,7 @@
 
     <style>
         .about {
-            background-color: #3baaff2e;
+            background-color: #e3f0ff;
         }
 
         .mensagem-sucesso {
@@ -546,6 +546,11 @@
     </section>
     <!--Eventos-->
     <style>
+        .services {
+            background:#c2dcff;
+            /* 🔵 Exemplo: azul bem claro */
+        }
+
         .eventos-titulo {
             text-align: center;
             font-size: 34px;
@@ -580,56 +585,65 @@
         .card-link:hover {
             transform: translateY(-6px);
         }
+
+        #eventos {
+            background: #ddecffe0;
+            /* cinza claro */
+            padding: 60px 0;
+        }
     </style>
     <section id="eventos">
-        <h2 class="eventos-titulo">Eventos IFlab</h2>
-    </section>
-    <div class="carousel-container">
-
-        <button class="carousel-btn prev">&#10094;</button>
-
-        <div class="carousel-wrapper">
-            <div class="carousel-track">
-
-                @foreach ($eventos as $evento)
-                    <a href="{{ route('eventos.show', $evento->id) }}" class="carousel-item event-card card-link"
-                        data-category="{{ $evento->categoria }}">
-
-                        <div class="event-image">
-                            @if ($evento->imagem && Storage::disk('public')->exists($evento->imagem))
-                                <img src="{{ Storage::url($evento->imagem) }}" alt="{{ $evento->titulo }}">
-                            @else
-                                <div class="placeholder">Sem imagem</div>
-                            @endif
-                        </div>
-
-                        <div class="event-content">
-                            <span class="event-date">
-                                {{ \Carbon\Carbon::parse($evento->data_evento)->format('d/m/Y') }}
-                                às {{ \Carbon\Carbon::parse($evento->hora_evento)->format('H:i') }}
-                            </span>
-                            <h3>{{ $evento->titulo }}</h3>
-                        </div>
-                    </a>
-                @endforeach
-
-            </div>
+        <div class="section-title">
+            <h2>Eventos IFlab</h2>
+            <p>Fique por dentro do que acontece no IFlab</p>
         </div>
-        <button class="carousel-btn next">&#10095;</button>
+        <div class="carousel-container">
 
-    </div>
-    <div class="filter-container">
-        @auth
-            <!-- Verificação de usuário para adicionar evento -->
-            @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com' ||
-                    strtolower(Auth::user()->email) === 'fernandes.junior@ifpr.edu.br' ||
-                    strtolower(Auth::user()->email) === 'jean.gentilini@ifpr.edu.br')
-                <a href="{{ route('eventos.create') }}" class="Eventos-btn-componente">
-                    Cadastrar Novo Evento
-                </a>
-            @endif
-        @endauth
-    </div>
+            <button class="carousel-btn prev">&#10094;</button>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+
+                    @foreach ($eventos as $evento)
+                        <a href="{{ route('eventos.show', $evento->id) }}" class="carousel-item event-card card-link"
+                            data-category="{{ $evento->categoria }}">
+
+                            <div class="event-image">
+                                @if ($evento->imagem && Storage::disk('public')->exists($evento->imagem))
+                                    <img src="{{ Storage::url($evento->imagem) }}" alt="{{ $evento->titulo }}">
+                                @else
+                                    <div class="placeholder">Sem imagem</div>
+                                @endif
+                            </div>
+
+                            <div class="event-content">
+                                <span class="event-date">
+                                    {{ \Carbon\Carbon::parse($evento->data_evento)->format('d/m/Y') }}
+                                    às {{ \Carbon\Carbon::parse($evento->hora_evento)->format('H:i') }}
+                                </span>
+                                <h3>{{ $evento->titulo }}</h3>
+                            </div>
+                        </a>
+                    @endforeach
+
+                </div>
+            </div>
+            <button class="carousel-btn next">&#10095;</button>
+
+        </div>
+        <div class="filter-container">
+            @auth
+                <!-- Verificação de usuário para adicionar evento -->
+                @if (strtolower(Auth::user()->email) === 'carolbrm265@gmail.com' ||
+                        strtolower(Auth::user()->email) === 'fernandes.junior@ifpr.edu.br' ||
+                        strtolower(Auth::user()->email) === 'jean.gentilini@ifpr.edu.br')
+                    <a href="{{ route('eventos.create') }}" class="Eventos-btn-componente">
+                        Cadastrar Novo Evento
+                    </a>
+                @endif
+            @endauth
+        </div>
+    </section>
 
     <!-- Booking Section -->
     <!-- Booking Section -->
@@ -679,6 +693,9 @@
             justify-content: space-between;
             flex-wrap: wrap;
             margin-top: 50px;
+        }
+        .booking{
+            background-color:#eff7ff;
         }
 
         .booking-steps .step {
@@ -813,7 +830,7 @@
     </div>
     <style>
         .booking-form {
-            background: #f5f5f5;
+            background: #ffffff;
             padding: 40px;
             border-radius: 10px;
             max-width: 800px;

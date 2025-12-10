@@ -1,7 +1,7 @@
 <div class="register-wrapper">
     <div class="register-card">
         <!-- Botão Voltar -->
-        <a href="{{ route('eventos.index') }}" class="back-btn">← Voltar</a>
+        <a href="{{ route('home') }}" class="back-btn">← Voltar</a>
 
         <h2 class="form-title">Criar Conta</h2>
 
@@ -59,97 +59,123 @@
 
 <style>
     /* ====== Layout geral ====== */
+    /* ==============================
+   Estilo Global
+============================== */
     body {
-        background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+        background: linear-gradient(135deg, #cce7ff 0%, #e6f3ff 100%);
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
+        overflow: hidden;
     }
 
+    /* ==============================
+   Wrapper do Registro
+============================== */
     .register-wrapper {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         padding: 20px;
+        position: relative;
     }
 
+    /* ==============================
+   Card de Registro
+============================== */
     .register-card {
         background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         padding: 40px 35px;
         width: 100%;
         max-width: 420px;
         animation: fadeIn 0.6s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .form-title {
-        text-align: center;
-        margin-bottom: 25px;
-        font-size: 1.6rem;
-        font-weight: bold;
-        color: #333;
+    .register-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
     }
 
-    /* ====== Botão Voltar ====== */
+    /* ==============================
+   Botão Voltar
+============================== */
     .back-btn {
         display: inline-block;
-        margin-bottom: 15px;
-        padding: 5px 10px;
-        font-size: 13px;
-        color: #007bff;
-        background-color: #f1f1f1;
-        border: 1px solid #ccc;
-        border-radius: 6px;
+        margin-bottom: 20px;
+        padding: 6px 14px;
+        font-size: 14px;
+        color: #0078d4;
+        background-color: #f0f8ff;
+        border: 1px solid #d0d7de;
+        border-radius: 10px;
         text-decoration: none;
         transition: all 0.2s ease;
     }
 
     .back-btn:hover {
-        background-color: #e2e6ea;
-        color: #0056b3;
+        background-color: #e1f0ff;
+        color: #004a8f;
         transform: translateY(-1px);
     }
 
-    /* ====== Campos ====== */
+    /* ==============================
+   Título do Formulário
+============================== */
+    .form-title {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    /* ==============================
+   Campos do Formulário
+============================== */
     .form-group {
-        margin-bottom: 18px;
+        margin-bottom: 20px;
     }
 
     .form-label {
         display: block;
-        font-weight: 600;
+        font-size: 14px;
+        font-weight: 500;
         margin-bottom: 6px;
         color: #444;
-        font-size: 14px;
     }
 
     .form-input {
         width: 100%;
-        padding: 11px 12px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid #d0d7de;
         font-size: 14px;
-        transition: all 0.25s ease;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
     }
 
     .form-input:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 6px rgba(0, 123, 255, 0.25);
         outline: none;
+        border-color: #0078d4;
+        box-shadow: 0 0 6px rgba(0, 120, 212, 0.3);
     }
 
     .form-error {
-        color: #e74c3c;
-        font-size: 12px;
+        color: #ff4d4f;
+        font-size: 13px;
         margin-top: 5px;
     }
 
-    /* ====== Ações ====== */
+    /* ==============================
+   Ações
+============================== */
     .form-actions {
         display: flex;
         justify-content: space-between;
@@ -159,36 +185,96 @@
 
     .form-link {
         font-size: 14px;
-        color: #007bff;
+        color: #0078d4;
         text-decoration: none;
         transition: color 0.2s ease;
     }
 
     .form-link:hover {
-        color: #0056b3;
+        color: #004a8f;
     }
 
+    /* Botão Registrar */
     .form-button {
-        background-color: #007bff;
+        background: linear-gradient(135deg, #0078d4, #0056a3);
         color: #fff;
-        padding: 10px 22px;
+        padding: 12px 25px;
         border: none;
-        border-radius: 8px;
+        border-radius: 50px;
         cursor: pointer;
         font-size: 15px;
-        font-weight: 500;
-        transition: background-color 0.25s ease;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
     }
 
     .form-button:hover {
-        background-color: #0056b3;
+        background: linear-gradient(135deg, #0056a3, #003d7a);
+        box-shadow: 0 10px 25px rgba(0, 86, 163, 0.5);
     }
 
-    /* ====== Animação ====== */
+    /* ==============================
+   Ícones Flutuantes (decorativo)
+============================== */
+    .floating-icons {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .icon-physics {
+        position: absolute;
+        font-size: 24px;
+        color: #0056a3;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .icon-physics:nth-child(1) {
+        top: 10%;
+        left: 5%;
+        animation-delay: 0s;
+    }
+
+    .icon-physics:nth-child(2) {
+        top: 30%;
+        right: 10%;
+        animation-delay: 2s;
+    }
+
+    .icon-physics:nth-child(3) {
+        bottom: 20%;
+        left: 15%;
+        animation-delay: 4s;
+    }
+
+    .icon-physics:nth-child(4) {
+        bottom: 10%;
+        right: 5%;
+        animation-delay: 6s;
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    /* ==============================
+   Animação Fade-in
+============================== */
     @keyframes fadeIn {
         from {
             opacity: 0;
-            transform: translateY(15px);
+            transform: translateY(20px);
         }
 
         to {
@@ -197,14 +283,24 @@
         }
     }
 
-    /* ====== Responsivo ====== */
+    /* ==============================
+   Responsividade
+============================== */
     @media (max-width: 480px) {
         .register-card {
-            padding: 25px 20px;
+            padding: 30px 20px;
         }
 
         .form-title {
-            font-size: 1.4rem;
+            font-size: 20px;
+        }
+
+        .form-button {
+            width: 100%;
+        }
+
+        .floating-icons {
+            display: none;
         }
     }
 </style>

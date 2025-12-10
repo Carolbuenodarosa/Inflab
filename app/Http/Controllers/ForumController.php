@@ -29,6 +29,7 @@ class ForumController extends Controller
         $request->validate([
             'titulo' => 'required|string|max:255',
             'descricao' => 'required|string',
+            'categoria' => 'required|string',
         ]);
 
         $user = auth()->user();
@@ -58,7 +59,8 @@ class ForumController extends Controller
         Topico::create([
             "titulo" => $request->titulo,
             "descricao" => $request->descricao,
-            "autor" => $user->name
+            "autor" => $user->name,
+             "categoria" => $request->categoria
         ]);
 
         return redirect()->route("forum.index")->with("success", "Tópico criado com sucesso!");

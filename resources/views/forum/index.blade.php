@@ -47,7 +47,7 @@
         opacity: .8;
     }
 
-    /* ===== Subtítulo ===== */
+    /* Subtítulos */
     .forum-subtitulo {
         font-size: 1.6em;
         font-weight: 800;
@@ -56,7 +56,7 @@
         padding-left: 2px;
     }
 
-    /* ===== GRID EM 2 COLUNAS ===== */
+    /* Grid */
     .forum-grid {
         display: grid;
         grid-template-columns: 1fr 350px;
@@ -69,7 +69,7 @@
         }
     }
 
-    /* ===== FORMULÁRIO ===== */
+    /* Formulário */
     .forum-form {
         background: #ffffff;
         border-radius: 10px;
@@ -79,21 +79,27 @@
     }
 
     .forum-form h3 {
-        color: #1e293b;
-        font-size: 1.15em;
-        font-weight: 600;
-        margin-bottom: 12px;
         text-align: center;
+        color: #1e293b;
+        margin-bottom: 12px;
+        font-weight: 600;
     }
 
     .forum-form input,
-    .forum-form textarea {
+    .forum-form textarea,
+    .forum-form select {
         width: 100%;
         border: 1px solid #cbd5e1;
         border-radius: 8px;
         padding: 10px;
         background: #f8fafc;
         margin-bottom: 10px;
+    }
+
+    .forum-form select:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        outline: none;
     }
 
     .forum-form button {
@@ -108,22 +114,21 @@
         cursor: pointer;
     }
 
-    /* ===== TÓPICOS ===== */
+    /* Tópicos */
     .forum-topic {
         background: #ffffff;
         border-radius: 12px;
         padding: 20px 22px;
         border: 1px solid #e2e8f0;
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.04);
         margin-bottom: 18px;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
         transition: .18s ease;
-        cursor: pointer;
     }
 
     .forum-topic:hover {
         transform: translateY(-3px);
         border-color: #2563eb;
-        box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.07);
+        box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.08);
     }
 
     .forum-topic a {
@@ -133,12 +138,11 @@
         text-decoration: none;
     }
 
-    /* ===== BOTÕES ===== */
+    /* Botões */
     .top-buttons {
         display: flex;
         gap: 12px;
         margin-bottom: 20px;
-        align-items: center;
         flex-wrap: wrap;
     }
 
@@ -149,22 +153,19 @@
         padding: 10px 22px;
         background: #0a6cc4;
         color: white;
-        font-weight: 700;
         border-radius: 10px;
+        font-weight: 700;
         text-decoration: none;
+        border: none;
         cursor: pointer;
-        border: none !important;
-        outline: none !important;
     }
 
-    .bottom-btn.delete-btn {
+    .delete-btn {
         background: #ef4444 !important;
     }
 
-    .bottom-btn.delete-btn:hover {
-        background-color: #8c2828 !important;
-        color: #fff !important;
-        transition: 0.3s;
+    .delete-btn:hover {
+        background: #b32727 !important;
     }
 </style>
 
@@ -201,9 +202,8 @@
                 <p style="text-align:center; color:#64748b;">Nenhum tópico disponível.</p>
             @endif
 
-            {{-- FORM DE DELETAR (SÓ ADMIN) --}}
             @if ($isAdmin)
-                <form action="{{ route('forum.destroyMultiple') }}" method="POST" id="delete-topicos-form">
+                <form action="{{ route('forum.destroyMultiple') }}" method="POST">
                     @csrf
                     @method('DELETE')
             @endif
@@ -218,11 +218,10 @@
                 @endif
             </div>
 
-            {{-- LISTAGEM --}}
             @foreach ($topicos as $topico)
-                <div class="forum-topic" data-url="{{ route('forum.show', $topico->id) }}">
-                    <div style="display:flex; align-items:center; gap:10px;">
+                <div class="forum-topic" onclick="window.location='{{ route('forum.show', $topico->id) }}'">
 
+                    <div style="display:flex; align-items:center; gap:10px;">
                         @if ($isAdmin)
                             <input type="checkbox" name="topicos[]" value="{{ $topico->id }}"
                                 onclick="event.stopPropagation();">
@@ -233,9 +232,8 @@
                         </a>
                     </div>
 
-                    <p>
-                        Criado por <strong>{{ $topico->autor }}</strong>
-                        em {{ $topico->created_at->format('d/m/Y') }}
+                    <p>Categoria <strong>{{ $topico->categoria }}</strong></p>
+                    <p>Criado por <strong>{{ $topico->autor }}</strong> em {{ $topico->created_at->format('d/m/Y') }}
                     </p>
                 </div>
             @endforeach
@@ -245,7 +243,7 @@
             @endif
         </div>
 
-        {{-- FORMULÁRIO DE CRIAR TÓPICO --}}
+        {{-- FORMULÁRIO DE CRIAÇÃO --}}
         <div class="forum-form">
             <h3>Criar Novo Tópico</h3>
 
@@ -259,82 +257,52 @@
                 }
             @endphp
 
-            {{-- ADMIN → pode criar sempre --}}
+            {{-- ADMIN — pode sempre criar --}}
             @if ($isAdmin)
                 <form action="{{ route('forum.store') }}" method="POST">
                     @csrf
                     <input type="text" name="titulo" placeholder="Título do tópico" required>
                     <textarea name="descricao" rows="3" placeholder="Descrição..." required></textarea>
                     <input type="text" value="{{ $user->name }}" readonly>
+
+                    <select name="categoria" required>
+                        <option value="" disabled selected>Selecione a categoria</option>
+                        <option value="Matematica">Matemática</option>
+                        <option value="Fisica">Física</option>
+                        <option value="Robotica">Robótica</option>
+                    </select>
+
                     <button type="submit">Criar Tópico</button>
                 </form>
 
-                {{-- USUÁRIO NORMAL → já criou --}}
+                {{-- Usuário já criou --}}
             @elseif($jaCriou)
-                <p style="color:#b91c1c; font-weight:bold; text-align:center;">
+                <p style="color:#b91c1c; text-align:center; font-weight:bold;">
                     Você já criou 1 tópico esta semana.
                 </p>
 
-                {{-- USUÁRIO NORMAL → pode criar --}}
+                {{-- Usuário comum pode criar --}}
             @else
                 <form action="{{ route('forum.store') }}" method="POST">
                     @csrf
                     <input type="text" name="titulo" placeholder="Título do tópico" required>
                     <textarea name="descricao" rows="3" placeholder="Descrição..." required></textarea>
+
                     <input type="text" value="{{ $user->name }}" readonly>
+
+                    <select name="categoria" required>
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        <option value="Matematica">Matemática</option>
+                        <option value="Fisica">Física</option>
+                        <option value="Robotica">Robótica</option>
+                    </select>
+
                     <button type="submit">Criar Tópico</button>
                 </form>
             @endif
         </div>
 
     </div>
-
 </div>
-
-<script>
-    document.querySelectorAll('.forum-topic').forEach(div => {
-        div.addEventListener('click', () => {
-            window.location.href = div.dataset.url;
-        });
-    });
-</script>
-<style>
-    .mensagem-sucesso {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #1fa85b;
-        color: white;
-        padding: 20px 28px;
-        border-radius: 12px;
-        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .mensagem-sucesso button {
-        background: #fff;
-        color: #1fa85b;
-        border: none;
-        padding: 6px 18px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: 0.2s;
-    }
-
-    .mensagem-sucesso button:hover {
-        background: #e0e0e0;
-    }
-</style>
-
-<script>
-    function fecharMensagem() {
-        document.getElementById('mensagem-sucesso').style.display = 'none';
-    }
-</script>
 
 @include('layouts.footer')

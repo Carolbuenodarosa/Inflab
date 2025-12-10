@@ -2,7 +2,7 @@
     <div class="login-card">
 
         <!-- Botão Voltar -->
-        <a href="{{ route('eventos.index') }}" class="back-btn">← Voltar</a>
+        <a href="{{ route('home') }}" class="back-btn">← Voltar</a>
 
         <h2 class="login-title">Acesso ao Sistema</h2>
 
@@ -47,7 +47,7 @@
                 @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}" class="form-link">Esqueceu sua senha?</a>
                 @endif
-                <button type="submit" class="form-button">Entrar</button>
+                <button type="submit" class="form-button"><i class="fas fa-sign-in-alt"></i> Entrar</button>
             </div>
         </form>
 
@@ -57,190 +57,284 @@
             </p>
         </div>
     </div>
+
+    <!-- Ícones flutuantes de física -->
+    <div class="floating-icons">
+        <i class="fas fa-atom icon-physics"></i>
+        <i class="fas fa-cogs icon-physics"></i>
+        <i class="fas fa-flask icon-physics"></i>
+        <i class="fas fa-lightbulb icon-physics"></i>
+    </div>
 </div>
 
 <style>
-    /* ====== Layout geral ====== */
+    /* ==============================
+   Estilo Global
+============================== */
     body {
-        background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+        background: linear-gradient(135deg, #cce7ff 0%, #e6f3ff 100%);
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
+        overflow: hidden;
     }
 
+    /* ==============================
+   Wrapper do Login
+============================== */
     .login-wrapper {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         padding: 20px;
-    }
-
-    .login-card {
-        background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        padding: 40px 35px;
-        width: 100%;
-        max-width: 420px;
-        animation: fadeIn 0.6s ease;
         position: relative;
     }
 
-    /* ====== Botão Voltar ====== */
+    /* ==============================
+   Card de Login
+============================== */
+    .login-card {
+        background-color: #fff;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        padding: 40px 35px;
+        width: 100%;
+        max-width: 400px;
+        position: relative;
+        animation: fadeIn 0.6s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .login-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ==============================
+   Botão Voltar
+============================== */
     .back-btn {
         display: inline-block;
-        margin-bottom: 15px;
-        padding: 5px 10px;
-        font-size: 13px;
-        color: #007bff;
-        background-color: #f1f1f1;
-        border: 1px solid #ccc;
-        border-radius: 6px;
+        margin-bottom: 20px;
+        padding: 6px 14px;
+        font-size: 14px;
+        color: #0078d4;
+        background-color: #f0f8ff;
+        border: 1px solid #d0d7de;
+        border-radius: 10px;
         text-decoration: none;
         transition: all 0.2s ease;
     }
 
     .back-btn:hover {
-        background-color: #e2e6ea;
-        color: #0056b3;
+        background-color: #e1f0ff;
+        color: #004a8f;
         transform: translateY(-1px);
     }
 
+    /* ==============================
+   Títulos e Mensagens
+============================== */
     .login-title {
         text-align: center;
-        margin-bottom: 25px;
-        font-size: 1.6rem;
-        color: #333;
+        margin-bottom: 30px;
+        font-size: 24px;
+        font-weight: 600;
     }
 
-    /* ====== Status ====== */
     .login-status {
-        background-color: #e8f5e9;
-        color: #2e7d32;
-        border: 1px solid #c8e6c9;
-        padding: 10px;
-        border-radius: 6px;
-        margin-bottom: 15px;
-        font-size: 14px;
         text-align: center;
+        margin-bottom: 15px;
+        color: #ff4d4f;
     }
 
-    /* ====== Campos ====== */
+    /* ==============================
+   Formulário
+============================== */
     .form-group {
-        margin-bottom: 18px;
+        margin-bottom: 20px;
     }
 
     .form-label {
         display: block;
-        font-weight: 600;
         margin-bottom: 6px;
-        color: #444;
-        font-size: 14px;
+        font-weight: 500;
     }
 
     .form-input {
         width: 100%;
-        padding: 11px 12px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #d0d7de;
         font-size: 14px;
-        transition: all 0.25s ease;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
     }
 
     .form-input:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 6px rgba(0, 123, 255, 0.25);
         outline: none;
+        border-color: #0078d4;
+        box-shadow: 0 0 5px rgba(0, 120, 212, 0.3);
     }
 
     .form-error {
-        color: #e74c3c;
-        font-size: 12px;
         margin-top: 5px;
+        color: #ff4d4f;
+        font-size: 13px;
     }
 
-    /* ====== Lembrar-me ====== */
+    /* ==============================
+   Checkbox Lembrar
+============================== */
     .form-remember {
-        display: flex;
-        align-items: center;
         margin-bottom: 20px;
     }
 
     .remember-label {
         display: flex;
         align-items: center;
-        cursor: pointer;
         font-size: 14px;
-        color: #555;
     }
 
     .remember-checkbox {
         margin-right: 8px;
     }
 
-    /* ====== Ações ====== */
+    /* ==============================
+   Botões e Links do Formulário
+============================== */
     .form-actions {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 10px;
+        margin-bottom: 20px;
     }
 
     .form-link {
-        font-size: 13px;
-        color: #007bff;
+        font-size: 14px;
+        color: #0078d4;
         text-decoration: none;
         transition: color 0.2s ease;
     }
 
     .form-link:hover {
-        color: #0056b3;
+        color: #004a8f;
     }
 
     .form-button {
-        background-color: #007bff;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #0078d4, #0056a3);
         color: #fff;
-        padding: 10px 20px;
+        padding: 12px 25px;
         border: none;
-        border-radius: 8px;
+        border-radius: 50px;
         cursor: pointer;
         font-size: 15px;
-        font-weight: 500;
-        transition: background-color 0.25s ease;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
     }
 
     .form-button:hover {
-        background-color: #0056b3;
+        background: linear-gradient(135deg, #0056a3, #003d7a);
+        box-shadow: 0 10px 25px rgba(0, 86, 163, 0.5);
     }
 
-    /* ====== Rodapé ====== */
+    .form-button i {
+        font-size: 16px;
+        transition: transform 0.3s ease;
+    }
+
+    .form-button:hover i {
+        transform: translateX(4px);
+    }
+
+    /* ==============================
+   Rodapé do Formulário
+============================== */
     .form-footer {
         text-align: center;
-        margin-top: 25px;
         font-size: 14px;
-        color: #555;
     }
 
     .form-register-link {
-        color: #007bff;
-        font-weight: 600;
+        color: #0078d4;
         text-decoration: none;
-        transition: color 0.2s ease;
+        font-weight: 500;
     }
 
     .form-register-link:hover {
-        color: #0056b3;
+        color: #004a8f;
     }
 
-    /* ====== Animação ====== */
+    /* ==============================
+   Ícones Flutuantes de Física
+============================== */
+    .floating-icons {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: visible;
+    }
+
+    .icon-physics {
+        position: absolute;
+        font-size: 24px;
+        color: #0056a3;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .icon-physics:nth-child(1) {
+        top: 10%;
+        left: 5%;
+        animation-delay: 0s;
+    }
+
+    .icon-physics:nth-child(2) {
+        top: 30%;
+        right: 10%;
+        animation-delay: 2s;
+    }
+
+    .icon-physics:nth-child(3) {
+        bottom: 20%;
+        left: 15%;
+        animation-delay: 4s;
+    }
+
+    .icon-physics:nth-child(4) {
+        bottom: 10%;
+        right: 5%;
+        animation-delay: 6s;
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    /* ==============================
+   Animação de Fade-in do Card
+============================== */
     @keyframes fadeIn {
         from {
             opacity: 0;
-            transform: translateY(15px);
+            transform: translateY(20px);
         }
 
         to {
@@ -249,14 +343,29 @@
         }
     }
 
-    /* ====== Responsivo ====== */
+    /* ==============================
+   Responsividade
+============================== */
     @media (max-width: 480px) {
         .login-card {
-            padding: 25px 20px;
+            padding: 30px 20px;
         }
 
         .login-title {
-            font-size: 1.4rem;
+            font-size: 20px;
+        }
+
+        .form-button {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Ocultar ícones flutuantes em telas pequenas */
+        .floating-icons {
+            display: none;
         }
     }
 </style>
+
+<!-- Lembre-se de ter o Font Awesome incluído no projeto para os ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
