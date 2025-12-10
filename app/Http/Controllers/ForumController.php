@@ -94,3 +94,4 @@ class ForumController extends Controller
         return redirect()->route('forum.index')->with('success', 'Tópicos excluídos com sucesso!');
     }
 }
+
