@@ -167,6 +167,35 @@
     .delete-btn:hover {
         background: #b32727 !important;
     }
+
+    /* ===== Filtro de Categoria ===== */
+    .filtro-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .filtro-container label {
+        font-weight: 600;
+        color: #1e40af;
+    }
+
+    .filtro-container select {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        min-width: 180px;
+    }
+
+    .filtro-container select:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        outline: none;
+    }
 </style>
 
 <div class="forum-container">
@@ -179,7 +208,6 @@
             {{ session('error') }}
         </div>
     @endif
-
     @if (session('success'))
         <div style="color:#166534; font-weight:bold; text-align:center; margin-bottom:15px;">
             {{ session('success') }}
@@ -198,6 +226,18 @@
         <div>
             <h2 class="forum-subtitulo">Tópicos em Aberto</h2>
 
+            {{-- FILTRO --}}
+            <div class="filtro-container">
+                <label for="filtroCategoria">Filtrar por categoria:</label>
+                <select id="filtroCategoria">
+                    <option value="">Todas</option>
+                    <option value="Comversa">Comversa</option>
+                    <option value="Fisica">Física</option>
+                    <option value="Robotica">Robótica</option>
+                    <option value="Dicusao sobre temas">Discussão sobre temas</option>
+                </select>
+            </div>
+
             @if ($topicos->isEmpty())
                 <p style="text-align:center; color:#64748b;">Nenhum tópico disponível.</p>
             @endif
@@ -210,31 +250,27 @@
 
             <div class="top-buttons">
                 <a href="{{ route('home') }}" class="bottom-btn">← Voltar</a>
-
                 @if ($isAdmin)
-                    <button type="submit" class="bottom-btn delete-btn">
-                        Excluir Selecionados
-                    </button>
+                    <button type="submit" class="bottom-btn delete-btn">Excluir Selecionados</button>
                 @endif
             </div>
 
             @foreach ($topicos as $topico)
-                <div class="forum-topic" onclick="window.location='{{ route('forum.show', $topico->id) }}'">
+                <div class="forum-topic" data-categoria="{{ $topico->categoria }}"
+                    onclick="window.location='{{ route('forum.show', $topico->id) }}'">
 
                     <div style="display:flex; align-items:center; gap:10px;">
                         @if ($isAdmin)
                             <input type="checkbox" name="topicos[]" value="{{ $topico->id }}"
                                 onclick="event.stopPropagation();">
                         @endif
-
-                        <a href="{{ route('forum.show', $topico->id) }}">
-                            {{ $topico->titulo }}
-                        </a>
+                        <a href="{{ route('forum.show', $topico->id) }}">{{ $topico->titulo }}</a>
                     </div>
 
                     <p>Categoria <strong>{{ $topico->categoria }}</strong></p>
                     <p>Criado por <strong>{{ $topico->autor }}</strong> em {{ $topico->created_at->format('d/m/Y') }}
                     </p>
+                    
                 </div>
             @endforeach
 
@@ -249,7 +285,6 @@
 
             @php
                 $jaCriou = false;
-
                 if ($user && !$isAdmin) {
                     $jaCriou = \App\Models\Topico::where('autor', $user->name)
                         ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
@@ -257,46 +292,38 @@
                 }
             @endphp
 
-            {{-- ADMIN — pode sempre criar --}}
             @if ($isAdmin)
                 <form action="{{ route('forum.store') }}" method="POST">
                     @csrf
                     <input type="text" name="titulo" placeholder="Título do tópico" required>
                     <textarea name="descricao" rows="3" placeholder="Descrição..." required></textarea>
                     <input type="text" value="{{ $user->name }}" readonly>
-
                     <select name="categoria" required>
                         <option value="" disabled selected>Selecione a categoria</option>
-                        <option value="Matematica">Matemática</option>
+                        <option value="Comversa">Comversa</option>
                         <option value="Fisica">Física</option>
                         <option value="Robotica">Robótica</option>
+                        <option value="Dicusao sobre temas">Dicusao sobre temas</option>
                     </select>
-
                     <button type="submit">Criar Tópico</button>
                 </form>
-
-                {{-- Usuário já criou --}}
             @elseif($jaCriou)
                 <p style="color:#b91c1c; text-align:center; font-weight:bold;">
                     Você já criou 1 tópico esta semana.
                 </p>
-
-                {{-- Usuário comum pode criar --}}
             @else
                 <form action="{{ route('forum.store') }}" method="POST">
                     @csrf
                     <input type="text" name="titulo" placeholder="Título do tópico" required>
                     <textarea name="descricao" rows="3" placeholder="Descrição..." required></textarea>
-
                     <input type="text" value="{{ $user->name }}" readonly>
-
                     <select name="categoria" required>
-                        <option value="" disabled selected>Selecione uma categoria</option>
-                        <option value="Matematica">Matemática</option>
+                        <option value="" disabled selected>Selecione a categoria</option>
+                        <option value="Comversa">Comversa</option>
                         <option value="Fisica">Física</option>
                         <option value="Robotica">Robótica</option>
+                        <option value="Dicusao sobre temas">Dicusao sobre temas</option>
                     </select>
-
                     <button type="submit">Criar Tópico</button>
                 </form>
             @endif
@@ -304,5 +331,21 @@
 
     </div>
 </div>
+
+<script>
+    const filtro = document.getElementById('filtroCategoria');
+    const topicos = document.querySelectorAll('.forum-topic');
+
+    filtro.addEventListener('change', function() {
+        const categoriaSelecionada = this.value;
+        topicos.forEach(topico => {
+            if (!categoriaSelecionada || topico.dataset.categoria === categoriaSelecionada) {
+                topico.style.display = 'block';
+            } else {
+                topico.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 @include('layouts.footer')

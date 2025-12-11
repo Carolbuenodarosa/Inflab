@@ -4,7 +4,7 @@
 
     <!-- ===== BOTÃO VOLTAR ===== -->
     <div class="linha-voltar">
-        <a href="/#agendamentos" class="btn btn-voltar"> ← Voltar para home</a>
+        <a href="{{ route('home') }}" class="btn btn-voltar">← Voltar para Home</a>
     </div>
 
     <h2 class="titulo-pagina">Agendamentos em Aguardo</h2>
@@ -20,7 +20,6 @@
                     <h3 class="agendamento-nome">{{ $ag->nome }}</h3>
 
                     <div class="agendamento-info">
-                        <p><strong>ID:</strong> {{ $ag->id }}</p>
                         <p><strong>E-mail:</strong> {{ $ag->email }}</p>
                         <p><strong>Telefone:</strong> {{ $ag->telefone }}</p>
                         <p><strong>Categoria:</strong> {{ $ag->categoria }}</p>
@@ -30,6 +29,12 @@
                         <p><strong>Projeto:</strong> {{ $ag->descricao_projeto }}</p>
                     </div>
 
+                    <!-- ===== BOTÕES ===== -->
+                    <div class="agendamento-actions">
+                        <input type="checkbox" class="selecionar-agendamento" data-id="{{ $ag->id }}"> Selecionar
+                        <button class="btn-excluir" data-id="{{ $ag->id }}">Excluir</button>
+                    </div>
+
                 </div>
             @endforeach
 
@@ -37,6 +42,42 @@
     @endif
 
 </div>
+<script defer>
+    document.querySelectorAll('.btn-excluir').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+
+            if (confirm('Deseja realmente excluir este agendamento?')) {
+                fetch('{{ route('agendamento.excluir') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            ids: [id] // enviar como array
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Agendamento excluído!');
+                            this.closest('.agendamento-card')
+                                .remove(); // remove o card sem recarregar a página
+                        } else {
+                            alert('Erro ao excluir!');
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert('Erro na requisição!');
+                    });
+            }
+        });
+    });
+</script>
+
+
 
 <style>
     /* --- Layout Geral --- */
@@ -45,11 +86,12 @@
         margin: auto;
         padding: 20px 25px;
         font-family: 'Segoe UI', Tahoma, sans-serif;
+        background-color: #f9f9f9;
     }
 
     /* ===== BOTÃO VOLTAR ===== */
     .linha-voltar {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 
     .btn {
@@ -59,29 +101,32 @@
         border-radius: 8px;
         text-decoration: none;
         color: #fff;
-        background-color: #285991;
-        transition: all 0.2s ease;
+        background: linear-gradient(135deg, #285991, #1c3c73);
+        transition: all 0.3s ease;
         border: none;
         cursor: pointer;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     }
 
     .btn:hover {
-        background-color: #0052b3;
+        background: linear-gradient(135deg, #1c3c73, #285991);
         transform: translateY(-2px);
     }
 
     /* --- Título da Página --- */
     .titulo-pagina {
         color: #004a8f;
-        font-size: 28px;
-        margin-bottom: 25px;
+        font-size: 30px;
+        margin-bottom: 30px;
         letter-spacing: 0.5px;
         font-weight: 600;
     }
 
     .nenhum {
         font-size: 17px;
-        color: #333;
+        color: #666;
+        text-align: center;
+        margin-top: 40px;
     }
 
     /* --- Lista de Cards --- */
@@ -93,33 +138,39 @@
 
     /* --- Card Individual --- */
     .agendamento-card {
-        background: #ffffff;
-        border-radius: 14px;
+        background: #fff;
+        border-radius: 16px;
         padding: 25px;
-        border: 1px solid #e0e0e0;
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
-        transition: 0.25s ease-in-out;
+        border-left: 5px solid #285991;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        transition: 0.3s ease-in-out;
         width: 100%;
     }
 
     .agendamento-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.10);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     }
 
     /* --- Título do Card --- */
     .agendamento-nome {
-        margin-bottom: 18px;
+        margin-bottom: 15px;
         font-size: 22px;
-        color: #004a8f;
+        color: #1c3c73;
         font-weight: 600;
     }
 
     /* --- Conteúdo do Card --- */
+    .agendamento-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px 20px;
+    }
+
     .agendamento-info p {
-        margin: 7px 0;
-        font-size: 16px;
-        color: #444;
+        margin: 5px 0;
+        font-size: 15px;
+        color: #333;
     }
 
     .agendamento-info strong {
@@ -133,16 +184,38 @@
         }
 
         .agendamento-nome {
-            font-size: 19px;
+            font-size: 20px;
         }
 
-        .agendamento-info p {
-            font-size: 15px;
+        .agendamento-info {
+            grid-template-columns: 1fr;
         }
 
         .btn {
             width: 100%;
             text-align: center;
         }
+    }
+
+    .agendamento-actions {
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .btn-excluir {
+        padding: 8px 16px;
+        font-size: 14px;
+        background-color: #c0392b;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .btn-excluir:hover {
+        background-color: #e74c3c;
     }
 </style>

@@ -109,4 +109,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/forum', [ForumController::class, 'store'])
         ->name('forum.store');
     Route::delete('/forum/destroy-multiple', [ForumController::class, 'destroyMultiple'])->name('forum.destroyMultiple');
+
+    Route::get('/agendamento', [AgendamentoController::class, 'index'])->name('agendamento.index');
+    Route::post('/agendamento/excluir', [AgendamentoController::class, 'destroy'])->name('agendamento.excluir');
 });
