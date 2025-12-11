@@ -30,6 +30,7 @@ class ForumController extends Controller
             'titulo' => 'required|string|max:255',
             'descricao' => 'required|string',
             'categoria' => 'required|string',
+            'categoria_outro' => 'nullable|string|max:255'
         ]);
 
         $user = auth()->user();
@@ -41,7 +42,7 @@ class ForumController extends Controller
 
         $isAdmin = in_array(strtolower($user->email), $admins);
 
-        // Limite: 1 por semana para usuários comuns
+        // Limite: 1 tópico por semana para usuários comuns
         if (!$isAdmin) {
 
             $jaCriouEstaSemana = Topico::where("autor", $user->name)
@@ -56,11 +57,26 @@ class ForumController extends Controller
             }
         }
 
+        /*
+        |--------------------------------------------------------------------------
+        | TRATAMENTO DA CATEGORIA "OUTRO"
+        |--------------------------------------------------------------------------
+        | Se o usuário selecionar "Outro", usamos o texto digitado no campo
+        | categoria_outro. Caso contrário, usamos a categoria selecionada.
+        |--------------------------------------------------------------------------
+        */
+
+        $categoria = $request->categoria;
+
+        if ($categoria === 'Outro') {
+            $categoria = $request->categoria_outro; // usa o texto digitado
+        }
+
         Topico::create([
             "titulo" => $request->titulo,
             "descricao" => $request->descricao,
             "autor" => $user->name,
-             "categoria" => $request->categoria
+            "categoria" => $categoria
         ]);
 
         return redirect()->route("forum.index")->with("success", "Tópico criado com sucesso!");
@@ -94,4 +110,3 @@ class ForumController extends Controller
         return redirect()->route('forum.index')->with('success', 'Tópicos excluídos com sucesso!');
     }
 }
-
