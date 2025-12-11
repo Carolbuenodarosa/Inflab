@@ -299,7 +299,7 @@
                     <textarea name="descricao" rows="3" placeholder="Descrição..." required></textarea>
                     <input type="text" value="{{ $user->name }}" readonly>
                     <select name="categoria" required>
-                        <option value="" disabled selected>Selecione a categoria</option>
+                        <option value="" disabled selected>Assunto</option>
                         <option value="Comversa">Comversa</option>
                         <option value="Fisica">Física</option>
                         <option value="Robotica">Robótica</option>
@@ -318,7 +318,7 @@
                     <textarea name="descricao" rows="3" placeholder="Descrição..." required></textarea>
                     <input type="text" value="{{ $user->name }}" readonly>
                     <select name="categoria" required>
-                        <option value="" disabled selected>Selecione a categoria</option>
+                        <option value="" disabled selected>Assunto</option>
                         <option value="Comversa">Comversa</option>
                         <option value="Fisica">Física</option>
                         <option value="Robotica">Robótica</option>
