@@ -228,13 +228,13 @@
 
             {{-- FILTRO --}}
             <div class="filtro-container">
-                <label for="filtroCategoria">Filtrar por categoria:</label>
+                <label for="filtroCategoria">Filtrar por Assunto</label>
                 <select id="filtroCategoria">
                     <option value="">Todas</option>
                     <option value="Comversa">Comversa</option>
                     <option value="Fisica">Física</option>
                     <option value="Robotica">Robótica</option>
-                    <option value="Dicusao sobre temas">Discussão sobre temas</option>
+                    <option value="Duvidas">Duvidas</option>
                 </select>
             </div>
 
@@ -303,7 +303,7 @@
                         <option value="Comversa">Comversa</option>
                         <option value="Fisica">Física</option>
                         <option value="Robotica">Robótica</option>
-                        <option value="Dicusao sobre temas">Dicusao sobre temas</option>
+                        <option value="Duvidas">Duvidas</option>
                     </select>
                     <button type="submit">Criar Tópico</button>
                 </form>
@@ -322,7 +322,7 @@
                         <option value="Comversa">Comversa</option>
                         <option value="Fisica">Física</option>
                         <option value="Robotica">Robótica</option>
-                        <option value="Dicusao sobre temas">Dicusao sobre temas</option>
+                        <option value="Duvidas">Duvidas</option>
                     </select>
                     <button type="submit">Criar Tópico</button>
                 </form>
