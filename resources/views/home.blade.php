@@ -27,7 +27,7 @@
         body {
             color: var(--ifpr-text);
             overflow-x: hidden;
-            background: #9bc6ff;
+            background: #eff7ff;
             /* 🔥 impede scroll lateral */
         }
 
@@ -889,6 +889,9 @@
             .booking-form .form-row {
                 flex-direction: column;
             }
+        }
+        #contato{
+            background-color:#9bc6ff;
         }
     </style>
 
